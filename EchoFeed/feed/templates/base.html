@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+    <link rel="stylesheet" href="{% static "css/profile.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="container">
+        <button class="toggle-btn"><i class="fa-solid fa-bars"></i></button>
+        <div class="sidebar">
+            <h1 class="sidebar-title">EchoFeed</h1>
+            <ul class="menu">
+                <li>
+                    <a href="{% url 'feed:index' %}" class="{% if request.path == '/' %}active-link{% endif %}">
+                        <i class="fa-solid fa-house"></i> Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-search"></i> Search
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-compass"></i> Explore
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-envelope"></i> Messages
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa-solid fa-bell"></i> Notifications
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'feed:profile' %}" class="{% if request.path == '/profile/' %}active-link{% endif %}">
+                        <i class="fa-solid fa-user"></i> Profile
+                    </a>
+                </li>
+                <li><a href="#"><i class="fa-solid fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+        <div class="bottom-bar">
+            <a href="{% url 'feed:index' %}" class="bottom-icon {% if request.path == '/' %}active-link{% endif %}">
+                <i class="fa-solid fa-house"></i>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-search"></i>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-compass"></i>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a href="{% url 'feed:profile' %}" class="{% if request.path == '/profile/' %}active-link{% endif %}">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+        <div class="main">
+        {% block main %}
+            <h2>Welcome to EchoFeed</h2>
+            <p>This is the main content area. Resize the screen to see the responsive sidebar in action.</p>
+        {% endblock %}
+        </div>
+    </div>
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const toggleBtn = document.querySelector('.toggle-btn');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

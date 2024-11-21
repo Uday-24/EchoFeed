@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Dark Mode Sidebar</title>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Sour Gummy', Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 17%;
+            background-color: #1e1e1e;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: transparent;
+            background: linear-gradient(45deg, #ff6ec4, #7873f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Edu AU VIC WA NT Pre', sans-serif;
+            text-shadow: 0 0 30px #ff6ec4, 0 0 30px #7873f5;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu li {
+            margin: 15px 0;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .menu li a.active-link {
+            background-color: #333333 !important;
+            color: #00c8ff;
+        }
+
+        .menu li a i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .menu li a:hover {
+            background-color: #333333;
+            color: #00c8ff;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .toggle-btn i {
+            font-size: 20px;
+        }
+
+        .main {
+            flex: 1;
+            background: rgb(0, 0, 0);
+            color: hotpink;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+                z-index: 999;
+            }
+
+            .sidebar.hidden {
+                transform: translateX(0);
+            }
+
+            .toggle-btn {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .sidebar {
+                width: 100vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button class="toggle-btn"><i class="fa-solid fa-bars"></i></button>
+        <div class="sidebar">
+            <h1 class="sidebar-title">EchoFeed</h1>
+            <ul class="menu">
+                <li><a href="#" class="active-link"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="#"><i class="fa-solid fa-search"></i> Search</a></li>
+                <li><a href="#"><i class="fa-solid fa-compass"></i> Explore</a></li>
+                <li><a href="#"><i class="fa-solid fa-envelope"></i> Messages</a></li>
+                <li><a href="#"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+                <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fa-solid fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <h2>Welcome to EchoFeed</h2>
+            <p>This is the main content area. Resize the screen to see the responsive sidebar in action.</p>
+        </div>
+    </div>
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const toggleBtn = document.querySelector('.toggle-btn');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

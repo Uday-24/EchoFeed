@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Profile{% endblock %}
+{% block main %}
+<div class="profile-main">
+    <div class="profile-first flex">
+        <div class="profile-image flex items-center justify-center">
+            <img src="{{profile.profile_image.url}}" alt="">
+        </div>
+        <div class="profile-info">
+            <div class="flex items-center unm-btn-div">
+                <div class="username">
+                    <p>{{profile.user.username}}</p>
+                </div>
+                <div class="buttons">
+                    <button>Edit profile</button>
+                    <button><i class="fa-solid fa-cog"></i></button>
+                </div>
+            </div>
+            <div class="flex post-details">
+                <div class="posts">
+                    <div class="info-div">
+                        <span class="numbers">{{profile.post_count}}</span> <span class="btn-title">Posts</span>
+                    </div>
+                </div>
+                <div class="followers">
+                    <div class="info-div">
+                        <span class="numbers">{{profile.followers_count}}</span> <span class="btn-title">Followers</span>
+                    </div class="info-div">
+                </div>
+                <div class="followings">
+                    <div class="info-div">
+                        <span class="numbers">{{profile.following_count}}</span> <span class="btn-title">Followings</span>
+                    </div class="info-div">
+                </div>
+            </div>
+            <br>
+            <div class="nickname">
+                {% if profile.nickname != None %}
+                {{profile.nickname}}
+                {% endif %}
+            </div>
+            {% if profile.bio != '' and profile.bio != None %}
+            <div class="bio">
+                <p>{{profile.bio}}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <div class="profile-second">
+        <div class="profile-second-titles flex items-center justify-center">
+            <button class="active-btn">Posts</button>
+            <button class="">Saved</button>
+        </div>
+        <div class="posts-container">
+            <div class="post">
+                <img src="{% static "images/pu.jpg" %}" alt="">
+            </div>
+            <div class="post">
+                <img src="{% static "images/pu.jpg" %}" alt="">
+            </div>
+            <div class="post">
+                <img src="{% static "images/pu.jpg" %}" alt="">
+            </div>
+            <div class="post">
+                <img src="{% static "images/pu.jpg" %}" alt="">
+            </div>
+            <div class="post">
+                <img src="{% static "images/pu.jpg" %}" alt="">
+            </div>
+            <div class="post">
+                <img src="{% static "images/pu.jpg" %}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

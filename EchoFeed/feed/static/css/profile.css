@@ -1,0 +1,229 @@
+.profile-main {
+    padding: 3vh 5vw;
+}
+
+.profile-image {
+    width: 30%;
+}
+
+.profile-info {
+    width: 70%;
+    color: #e2e8f0;
+    /* Light grey for general text */
+}
+
+.profile-image img {
+    width: 15vw;
+    height: 15vw;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #2d3748;
+    /* Slightly darker border for contrast */
+}
+
+.profile-info .username p {
+    font-size: 1.7em;
+    color: #90cdf4;
+    /* Light blue for the username */
+    font-weight: bold;
+}
+
+.profile-info .buttons {
+    margin-left: 10vw;
+}
+
+.profile-info .buttons button {
+    height: 35px;
+    border-radius: 10px;
+    border: 1px solid #4a5568;
+    /* Dark grey border */
+    padding: 0 15px;
+    font-weight: bold;
+    background: #2b6cb0;
+    /* Blue button background */
+    color: #edf2f7;
+    /* Light text for contrast */
+    cursor: pointer;
+}
+
+.profile-info .buttons button:hover {
+    background: #3182ce;
+    /* Lighter blue on hover */
+    border-color: #3182ce;
+}
+
+.profile-info .followers {
+    margin: 0 2.5vw;
+}
+
+.post-details .info-div .numbers {
+    font-size: 1.2em;
+    margin-right: 5px;
+    font-weight: bold;
+    color: #f6e05e;
+    /* Yellow for numbers */
+}
+
+.post-details .info-div {
+    font-size: 1.1em;
+    color: #a0aec0;
+    /* Grey for descriptions */
+}
+
+.profile-info .bio {
+    margin-top: 30px;
+    text-align: justify;
+    /* word-break: break-all; */
+    /* overflow-wrap: break-word; */
+    color: #e2e8f0;
+    /* Light grey for bio text */
+    background-color: #2d3748;
+    /* Dark grey background for contrast */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.profile-info .followed-by span {
+    margin-top: 10px;
+    font-style: italic;
+    color: #81e6d9;
+    /* Teal for followed-by text */
+}
+/* Default styles for larger screens (already provided) */
+
+.profile-second .profile-second-titles button{
+    margin: 0 2vw;
+    padding: 1vh 2vw;
+    font-size: larger;
+    font-family: 'Sour Gummy';
+    background: none;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.profile-second .profile-second-titles button.active-btn{
+    border-bottom: 2px solid silver;
+}
+
+.profile-second .posts-container{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.profile-second .posts-container img{
+    width: 17vw;
+    height: 17vw;
+    margin: 10px 25px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+    .profile-main {
+        padding: 2vh 3vw;
+        flex-direction: column;
+    }
+
+    .profile-first {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-image {
+        width: 100%;
+        text-align: center;
+    }
+
+    .profile-image img {
+        width: 20vw;
+    }
+
+    .profile-info {
+        width: 100%;
+        text-align: center;
+        margin-top: 2vh;
+    }
+
+    .profile-info .buttons {
+        margin: 0;
+    }
+
+    .profile-info .followers {
+        margin: 0 7vw;
+    }
+
+    .profile-info .unm-btn-div{
+        justify-content: space-around;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-main {
+        padding: 2vh 3vw;
+    }
+
+    .profile-image img {
+        width: 25vw;
+    }
+
+    .profile-info .username p {
+        font-size: 1.5em;
+    }
+
+    .profile-info .buttons button {
+        height: 30px;
+        padding: 0 10px;
+        font-size: 0.9em;
+    }
+
+    .post-details .info-div .numbers {
+        font-size: 1.2em;
+    }
+
+
+    .profile-info .followers {
+        margin: 0 5vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-image img {
+        width: 30vw;
+    }
+
+    .profile-info .username p {
+        font-size: 1.3em;
+    }
+
+    .profile-info .bio {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .profile-info .buttons button {
+        height: 28px;
+        font-size: 0.8em;
+        padding: 0 8px;
+    }
+
+    .post-details .info-div .numbers {
+        font-size: 1.2em;
+    }
+
+    .post-details .info-div {
+        font-size: 1em;
+    }
+
+    .profile-info .followed-by p {
+        font-size: 0.9em;
+    }
+
+    .post-details {
+        justify-content: space-between;
+    }
+}

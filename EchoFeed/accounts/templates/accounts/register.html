@@ -1,0 +1,94 @@
+{% extends "acc_base.html" %}
+{% load static %}
+{% block title %}Getting started with EchoFeed{% endblock %}
+{% block container %}
+<div class="loader" id="loader">
+    <img src="{% static 'images/loader.svg' %}" alt="Loading...">
+</div>
+<div class="wrapper">
+    <div class="change-form-group">
+        <button class="btn-active" id="sign-up-switch"><p>Sign Up</p></button>
+        <button id="sign-in-switch"><p>Sign In</p></button>
+    </div>
+    <form id="register-form" class="form">
+        {% csrf_token %}
+            <h1 class="title">Create Account</h1>
+            <div class="form-group">
+                <div class="input-data">
+                    <input type="text" name="username" maxlength="150" required aria-describedby="id_username_helptext" id="id_username">
+                    <div class="underline"></div>
+                    <label for="username" id="username-label">Username</label>
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-data">
+                    <input type="text" name="email" id="id_email" required>
+                    <div class="underline"></div>
+                    <label for="email" id="email-label">Email</label>
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-data">
+                    <input type="password" name="password" required id="id_password">
+                    <div class="underline"></div>
+                    <label for="password">Password</label>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-data">
+                    <input type="password" name="confirm_password" required id="id_confirm_password">
+                    <div class="underline"></div>
+                    <label for="confirm_password">Confirm Password</label>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+            </div>
+            <button type="submit" id="submit">Register</button>
+    </form>
+    <form id="login-form" class="form">
+        {% csrf_token %}
+        <h1 class="title">Login</h1>
+        <div class="form-group">
+            <div class="input-data">
+                <input type="text" name="username" maxlength="150" required id="id_username_login">
+                <div class="underline"></div>
+                <label for="username" id="username-label">Username or Email</label>
+                <i class="fa-solid fa-user"></i>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-data">
+                <input type="password" name="password" required id="id_password_login">
+                <div class="underline"></div>
+                <label for="password">Password</label>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+        </div>
+        <button type="submit" id="submit-login">Login</button>
+        <br>
+        <div>
+            <a href="{% url "password_reset" %}" class="gradient-text">Forgot Password?</a>
+        </div>
+    </form>
+</div>
+<div id="alertBox" class="alert-box">
+    {% comment %} This is an alert message! {% endcomment %}
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    const registerUrl = "{% url 'register' %}";
+    const loginUrl = "{% url 'login' %}";
+    const verifyOtpUrl = "{% url 'verify_otp' %}";
+    const checkUsernameUrl = "{% url 'check_username' %}";
+    const checkEmailUrl = "{% url 'check_email' %}";
+    const csrfToken = "{{ csrf_token }}";
+</script>
+<script src="{% static 'js/showAlert.js' %}"></script>
+<script src="{% static 'js/register.js' %}"></script>
+<script src="{% static 'js/login.js' %}"></script>
+{% endblock %}

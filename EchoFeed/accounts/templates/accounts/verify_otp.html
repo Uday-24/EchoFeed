@@ -1,0 +1,20 @@
+{% extends "acc_base.html" %}
+{% block title %}Verify OTP{% endblock %}
+{% block container %}
+<div class="wrapper">
+    <h1 class="title">Verify OTP</h1>
+
+    <form method="POST" id="register-form" class="form">
+    {% csrf_token %}
+    <div class="form-group">
+        <div class="input-data">
+            <input type="text" name="otp" id="otp" required>
+            <div class="underline"></div>
+            <label for="username" id="username-label">OTP</label>
+            <i class="fa-solid fa-user"></i>
+        </div>
+        <button type="submit">Verify</button>
+    </div>
+    </form>
+</div>
+{% endblock %}
