@@ -11,7 +11,6 @@
 </head>
 <body>
     <div class="container">
-        <button class="toggle-btn"><i class="fa-solid fa-bars"></i></button>
         <div class="sidebar">
             <h1 class="sidebar-title">EchoFeed</h1>
             <ul class="menu">
@@ -72,14 +71,6 @@
         {% endblock %}
         </div>
     </div>
-    <script>
-        const sidebar = document.querySelector('.sidebar');
-        const toggleBtn = document.querySelector('.toggle-btn');
-
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
-        });
-    </script>
     {% block js %}
     {% endblock %}
 </body>

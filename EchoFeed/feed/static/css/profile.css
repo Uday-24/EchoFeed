@@ -141,6 +141,7 @@
 
     .profile-image img {
         width: 20vw;
+        height: 20vw;
     }
 
     .profile-info {
@@ -169,6 +170,7 @@
 
     .profile-image img {
         width: 25vw;
+        height: 25vw;
     }
 
     .profile-info .username p {
@@ -194,6 +196,7 @@
 @media (max-width: 480px) {
     .profile-image img {
         width: 30vw;
+        height: 30vw;
     }
 
     .profile-info .username p {
@@ -225,5 +228,145 @@
 
     .post-details {
         justify-content: space-between;
+    }
+}
+
+/* Modal container */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Darker overlay for night mode */
+    z-index: 1000;
+}
+
+/* Hide modal by default */
+.hidden {
+    display: none;
+}
+
+/* Modal content box */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    background: #2d3748; /* Dark grey background for the modal */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    color: #e2e8f0; /* Light grey text for readability */
+}
+
+/* Modal header */
+.modal-content h2 {
+    color: #90cdf4; /* Light blue for the heading */
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Modal form input fields */
+.modal-content label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #a0aec0; /* Grey for labels */
+}
+
+.modal-content input[type="text"],
+.modal-content textarea,
+.modal-content input[type="file"] {
+    width: 100%; /* Ensure proper width with padding */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #4a5568; /* Darker border for input fields */
+    border-radius: 5px;
+    background: #1a202c; /* Darker background for inputs */
+    color: #e2e8f0; /* Light grey text */
+    font-size: 1em;
+    resize: none; /* Prevent resizing of textarea */
+    box-sizing: border-box; /* Ensure padding doesn't overflow */
+}
+
+.modal-content textarea {
+    height: 100px; /* Set a default height for better usability */
+    overflow-y: auto; /* Allow scrolling if content exceeds height */
+}
+
+/* Custom Scrollbar Styling for Textarea */
+.modal-content textarea::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+}
+
+.modal-content textarea::-webkit-scrollbar-track {
+    background: #2d3748; /* Match the modal's background */
+    border-radius: 5px; /* Rounded edges for track */
+}
+
+.modal-content textarea::-webkit-scrollbar-thumb {
+    background: #4a5568; /* Darker scrollbar thumb */
+    border-radius: 5px; /* Rounded scrollbar */
+}
+
+.modal-content textarea::-webkit-scrollbar-thumb:hover {
+    background: #90cdf4; /* Light blue on hover */
+}
+
+/* Modal submit button */
+.modal-content button[type="submit"] {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #3182ce; /* Blue background for the button */
+    color: #edf2f7; /* Light text for contrast */
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.modal-content button[type="submit"]:hover {
+    background: #2b6cb0; /* Darker blue on hover */
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 18px;
+    color: #e2e8f0; /* Light grey for the close button */
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #f56565; /* Red hover effect */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 15px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5em;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content textarea {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .modal-content textarea {
+        height: 80px; /* Adjust height for smaller screens */
     }
 }

@@ -115,7 +115,7 @@ def verify_otp(request):
             else:
                 print('try again')
     except Exception as e:
-        print(f"Error occurreddddd: {e}")
+        print(f"Error occurred: {e}")
         return redirect('register')
 
     return render(request, 'accounts/verify_otp.html')
