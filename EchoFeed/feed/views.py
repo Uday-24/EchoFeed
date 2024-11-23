@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from accounts.models import UserProfile
 from django.contrib.auth.models import User
+
+from accounts.models import UserProfile
+from posts.models import UserPosts
 # Create your views here.
 
 @login_required
@@ -12,8 +14,10 @@ def index(request):
 @login_required
 def profile(request):
     profile = UserProfile.objects.get(user__username=request.user)
+    myPosts = UserPosts.objects.filter(user__username=request.user).order_by('-creation_time')
     context = {
-        "profile": profile, 
+        "profile": profile,
+        "myPosts": myPosts,
     }
     return render(request, 'feed/profile.html', context)
 

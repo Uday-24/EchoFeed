@@ -55,29 +55,16 @@
     <hr>
     <div class="profile-second">
         <div class="profile-second-titles flex items-center justify-center">
-            <button class="">Create</button>
+            <button id="openModal" class="">Create</button>
             <button class="active-btn">Posts</button>
             <button class="">Saved</button>
         </div>
         <div class="posts-container">
+            {% for post in myPosts %}
             <div class="post">
-                <img src="{% static "images/pu.jpg" %}" alt="">
+                <img src="{{post.post_img.url}}" alt="">
             </div>
-            <div class="post">
-                <img src="{% static "images/pu.jpg" %}" alt="">
-            </div>
-            <div class="post">
-                <img src="{% static "images/pu.jpg" %}" alt="">
-            </div>
-            <div class="post">
-                <img src="{% static "images/pu.jpg" %}" alt="">
-            </div>
-            <div class="post">
-                <img src="{% static "images/pu.jpg" %}" alt="">
-            </div>
-            <div class="post">
-                <img src="{% static "images/pu.jpg" %}" alt="">
-            </div>
+            {% endfor %}
         </div>
     </div>
     <div id="editProfileModal" class="modal hidden">
@@ -107,12 +94,39 @@
         </div>
     </div>
 </div>
+<div class="night-modal">
+    <!-- Modal -->
+    <div class="modal" id="uploadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Upload Post</h2>
+                <button class="close" id="closeModal">&times;</button>
+            </div>
+            <form id="uploadForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="postImage">Image</label>
+                    <input type="file" id="postImage" name="postImage" accept="image/*" required>
+                    <div id="imagePreview">Image preview will appear here</div>
+                </div>
+                <div class="form-group">
+                    <label for="postCaption">Caption</label>
+                    <textarea id="postCaption" name="postCaption" placeholder="Write a caption..." maxlength="500"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" id="uploadPostBtn">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div id="alertBox" class="alert-box">
     {% comment %} This is an alert message! {% endcomment %}
 </div>
 {% endblock %}
 {% block js %}
 <script>
+    $('#uploadModal').fadeOut();
     document.addEventListener("DOMContentLoaded", () => {
         const editButton = document.querySelector(".buttons button:first-child");
         const modal = document.getElementById("editProfileModal");
@@ -136,8 +150,10 @@
     const checkUsernameUrl = "{% url 'check_username' %}";
     const csrfToken = "{{ csrf_token }}";
     const updateProfileUrl = "{% url 'feed:update_profile' %}";
+    const uploadPostUrl = "{% url 'posts:upload_post' %}";
 </script>
 <script src="{% static 'js/showAlert.js' %}"></script>
 <script src="{% static 'js/checkUsername.js' %}"></script>
 <script src="{% static 'js/editProfile.js' %}"></script>
+<script src="{% static 'js/postModal.js' %}"></script>
 {% endblock %}

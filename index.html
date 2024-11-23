@@ -4,167 +4,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Dark Mode Sidebar</title>
-    <!-- Font Awesome CDN for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Upload Post Modal</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
-
-        body {
-            margin: 0;
-            font-family: 'Sour Gummy', Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            overflow-x: hidden;
+        .night-modal {
+            font-family: Arial, sans-serif;
         }
 
-        .container {
-            display: flex;
-            min-height: 100vh;
+        .night-modal button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #1E88E5;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
         }
 
-        .sidebar {
-            height: 100vh;
-            width: 17%;
-            background-color: #1e1e1e;
+        .night-modal button:hover {
+            background: #1565C0;
+        }
+
+        /* Modal styles */
+        .night-modal .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .night-modal .modal-content {
+            background: #1E1E1E;
             padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease-in-out;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
-        .sidebar.hidden {
-            transform: translateX(-100%);
+        .night-modal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
-        .sidebar-title {
-            font-size: 2em;
-            margin-bottom: 20px;
-            text-align: center;
-            color: transparent;
-            background: linear-gradient(45deg, #ff6ec4, #7873f5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Edu AU VIC WA NT Pre', sans-serif;
-            text-shadow: 0 0 30px #ff6ec4, 0 0 30px #7873f5;
-        }
-
-        .menu {
-            list-style: none;
-            padding: 0;
-        }
-
-        .menu li {
-            margin: 15px 0;
-        }
-
-        .menu li a {
-            text-decoration: none;
+        .night-modal .modal-header h2 {
+            margin: 0;
             color: #ffffff;
+        }
+
+        .night-modal .modal-header .close {
+            cursor: pointer;
             font-size: 18px;
+            background: none;
+            border: none;
+            color: #ffffff;
+        }
+
+        .night-modal .form-group {
+            margin-bottom: 15px;
+        }
+
+        .night-modal .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #bbbbbb;
+        }
+
+        .night-modal .form-group input,
+        .night-modal .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: #2C2C2C;
+            border: 1px solid #444;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .night-modal .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .night-modal #imagePreview {
+            width: 100%;
+            height: 200px;
+            background: #2C2C2C;
+            border: 1px dashed #444;
+            margin-top: 10px;
             display: flex;
             align-items: center;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
+            justify-content: center;
+            font-size: 14px;
+            color: #aaaaaa;
+            overflow: hidden;
         }
 
-        .menu li a.active-link {
-            background-color: #333333 !important;
-            color: #00c8ff;
+        .night-modal #imagePreview img {
+            max-width: 100%;
+            max-height: 100%;
         }
 
-        .menu li a i {
-            margin-right: 10px;
-            font-size: 20px;
+        .night-modal .form-actions {
+            text-align: right;
         }
 
-        .menu li a:hover {
-            background-color: #333333;
-            color: #00c8ff;
+        .night-modal .form-actions button {
+            background: #1E88E5;
         }
 
-        .toggle-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background-color: #333333;
-            color: #ffffff;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: none;
-        }
-
-        .toggle-btn i {
-            font-size: 20px;
-        }
-
-        .main {
-            flex: 1;
-            background: rgb(0, 0, 0);
-            color: hotpink;
-            padding: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-                position: fixed;
-                z-index: 999;
-            }
-
-            .sidebar.hidden {
-                transform: translateX(0);
-            }
-
-            .toggle-btn {
-                display: block;
-            }
-
-            .main {
-                margin-left: 0;
-            }
-        }
-
-        @media (max-width: 520px) {
-            .sidebar {
-                width: 100vw;
-            }
+        .night-modal .form-actions button:hover {
+            background: #1565C0;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <button class="toggle-btn"><i class="fa-solid fa-bars"></i></button>
-        <div class="sidebar">
-            <h1 class="sidebar-title">EchoFeed</h1>
-            <ul class="menu">
-                <li><a href="#" class="active-link"><i class="fa-solid fa-house"></i> Home</a></li>
-                <li><a href="#"><i class="fa-solid fa-search"></i> Search</a></li>
-                <li><a href="#"><i class="fa-solid fa-compass"></i> Explore</a></li>
-                <li><a href="#"><i class="fa-solid fa-envelope"></i> Messages</a></li>
-                <li><a href="#"><i class="fa-solid fa-bell"></i> Notifications</a></li>
-                <li><a href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
-                <li><a href="#"><i class="fa-solid fa-cog"></i> Settings</a></li>
-            </ul>
-        </div>
-        <div class="main">
-            <h2>Welcome to EchoFeed</h2>
-            <p>This is the main content area. Resize the screen to see the responsive sidebar in action.</p>
+    <div class="night-modal">
+        <button id="openModal">Upload Post (Night Mode)</button>
+
+        <!-- Modal -->
+        <div class="modal" id="uploadModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Upload Post</h2>
+                    <button class="close" id="closeModal">&times;</button>
+                </div>
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label for="postImage">Image</label>
+                        <input type="file" id="postImage" name="image" accept="image/*" required>
+                        <div id="imagePreview">Image preview will appear here</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="postCaption">Caption</label>
+                        <textarea id="postCaption" name="caption" placeholder="Write a caption..." required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Upload</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <script>
-        const sidebar = document.querySelector('.sidebar');
-        const toggleBtn = document.querySelector('.toggle-btn');
 
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
+
+    <script>
+        $(document).ready(function () {
+            // Open modal
+            $('#openModal').on('click', function () {
+                $('#uploadModal').fadeIn();
+            });
+
+            // Close modal
+            $('#closeModal').on('click', function () {
+                $('#uploadModal').fadeOut();
+            });
+
+            // Close modal when clicking outside
+            $(window).on('click', function (e) {
+                if ($(e.target).is('#uploadModal')) {
+                    $('#uploadModal').fadeOut();
+                }
+            });
+
+            // Image preview functionality
+            $('#postImage').on('change', function () {
+                const file = this.files[0];
+                const reader = new FileReader();
+
+                if (file) {
+                    reader.onload = function (e) {
+                        $('#imagePreview').html(`<img src="${e.target.result}" alt="Image Preview">`);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    $('#imagePreview').html('Image preview will appear here');
+                }
+            });
+
+            // Form submission
+            $('#uploadForm').on('submit', function (e) {
+                e.preventDefault();
+                alert('Post uploaded successfully!');
+                $('#uploadModal').fadeOut();
+            });
         });
+
     </script>
 </body>
 

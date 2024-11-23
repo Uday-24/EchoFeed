@@ -90,9 +90,10 @@
     color: #81e6d9;
     /* Teal for followed-by text */
 }
+
 /* Default styles for larger screens (already provided) */
 
-.profile-second .profile-second-titles button{
+.profile-second .profile-second-titles button {
     margin: 0 2vw;
     padding: 1vh 2vw;
     font-size: larger;
@@ -104,24 +105,26 @@
     cursor: pointer;
 }
 
-.profile-second .profile-second-titles button.active-btn{
+.profile-second .profile-second-titles button.active-btn {
     border-bottom: 2px solid silver;
 }
 
-.profile-second .posts-container{
+.profile-second .posts-container {
     margin-top: 50px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.profile-second .posts-container img{
+.profile-second .posts-container img {
     width: 20vw;
     height: 20vw;
     margin: 10px 10px;
     border-radius: 10px;
     object-fit: cover;
+    cursor: pointer;
 }
+
 /* Responsive adjustments */
 @media (max-width: 1000px) {
     .profile-main {
@@ -144,6 +147,12 @@
         height: 20vw;
     }
 
+    .profile-second .posts-container img {
+        width: 25vw;
+        height: 25vw;
+        margin: 10px 10px;
+    }
+
     .profile-info {
         width: 100%;
         text-align: center;
@@ -158,7 +167,7 @@
         margin: 0 7vw;
     }
 
-    .profile-info .unm-btn-div{
+    .profile-info .unm-btn-div {
         justify-content: space-around;
     }
 }
@@ -171,6 +180,12 @@
     .profile-image img {
         width: 25vw;
         height: 25vw;
+    }
+
+    .profile-second .posts-container img {
+        width: 30vw;
+        height: 30vw;
+        margin: 10px 10px;
     }
 
     .profile-info .username p {
@@ -241,7 +256,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Darker overlay for night mode */
+    background: rgba(0, 0, 0, 0.8);
+    /* Darker overlay for night mode */
     z-index: 1000;
 }
 
@@ -254,19 +270,23 @@
 .modal-content {
     display: flex;
     flex-direction: column;
-    background: #2d3748; /* Dark grey background for the modal */
+    background: #2d3748;
+    /* Dark grey background for the modal */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    /* Subtle shadow for depth */
     width: 90%;
     max-width: 500px;
     position: relative;
-    color: #e2e8f0; /* Light grey text for readability */
+    color: #e2e8f0;
+    /* Light grey text for readability */
 }
 
 /* Modal header */
 .modal-content h2 {
-    color: #90cdf4; /* Light blue for the heading */
+    color: #90cdf4;
+    /* Light blue for the heading */
     font-size: 1.8em;
     font-weight: bold;
     margin-bottom: 15px;
@@ -277,54 +297,71 @@
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #a0aec0; /* Grey for labels */
+    color: #a0aec0;
+    /* Grey for labels */
 }
 
 .modal-content input[type="text"],
 .modal-content textarea,
 .modal-content input[type="file"] {
-    width: 100%; /* Ensure proper width with padding */
+    width: 100%;
+    /* Ensure proper width with padding */
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #4a5568; /* Darker border for input fields */
+    border: 1px solid #4a5568;
+    /* Darker border for input fields */
     border-radius: 5px;
-    background: #1a202c; /* Darker background for inputs */
-    color: #e2e8f0; /* Light grey text */
+    background: #1a202c;
+    /* Darker background for inputs */
+    color: #e2e8f0;
+    /* Light grey text */
     font-size: 1em;
-    resize: none; /* Prevent resizing of textarea */
-    box-sizing: border-box; /* Ensure padding doesn't overflow */
+    resize: none;
+    /* Prevent resizing of textarea */
+    box-sizing: border-box;
+    /* Ensure padding doesn't overflow */
 }
 
 .modal-content textarea {
-    height: 100px; /* Set a default height for better usability */
-    overflow-y: auto; /* Allow scrolling if content exceeds height */
+    height: 100px;
+    /* Set a default height for better usability */
+    overflow-y: auto;
+    /* Allow scrolling if content exceeds height */
 }
 
 /* Custom Scrollbar Styling for Textarea */
 .modal-content textarea::-webkit-scrollbar {
-    width: 8px; /* Set the width of the scrollbar */
+    width: 8px;
+    /* Set the width of the scrollbar */
 }
 
 .modal-content textarea::-webkit-scrollbar-track {
-    background: #2d3748; /* Match the modal's background */
-    border-radius: 5px; /* Rounded edges for track */
+    background: #2d3748;
+    /* Match the modal's background */
+    border-radius: 5px;
+    /* Rounded edges for track */
 }
 
 .modal-content textarea::-webkit-scrollbar-thumb {
-    background: #4a5568; /* Darker scrollbar thumb */
-    border-radius: 5px; /* Rounded scrollbar */
+    background: #4a5568;
+    /* Darker scrollbar thumb */
+    border-radius: 5px;
+    /* Rounded scrollbar */
 }
 
 .modal-content textarea::-webkit-scrollbar-thumb:hover {
-    background: #90cdf4; /* Light blue on hover */
+    background: #90cdf4;
+    /* Light blue on hover */
 }
 
 /* Modal submit button */
 .modal-content button[type="submit"] {
     display: inline-block;
     padding: 10px 20px;
-    background: #3182ce; /* Blue background for the button */
-    color: #edf2f7; /* Light text for contrast */
+    background: #3182ce;
+    /* Blue background for the button */
+    color: #edf2f7;
+    /* Light text for contrast */
     border: none;
     border-radius: 5px;
     font-weight: bold;
@@ -333,7 +370,8 @@
 }
 
 .modal-content button[type="submit"]:hover {
-    background: #2b6cb0; /* Darker blue on hover */
+    background: #2b6cb0;
+    /* Darker blue on hover */
 }
 
 /* Close button */
@@ -342,12 +380,14 @@
     top: 10px;
     right: 15px;
     font-size: 18px;
-    color: #e2e8f0; /* Light grey for the close button */
+    color: #e2e8f0;
+    /* Light grey for the close button */
     cursor: pointer;
 }
 
 .close-btn:hover {
-    color: #f56565; /* Red hover effect */
+    color: #f56565;
+    /* Red hover effect */
 }
 
 /* Adjustments for smaller screens */
@@ -367,6 +407,128 @@
     }
 
     .modal-content textarea {
-        height: 80px; /* Adjust height for smaller screens */
+        height: 80px;
+        /* Adjust height for smaller screens */
     }
+}
+
+.night-modal {
+    font-family: Arial, sans-serif;
+}
+
+.night-modal button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #1E88E5;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.night-modal button:hover {
+    background: #1565C0;
+}
+
+/* Modal styles */
+.night-modal .modal {
+    /* display: none;
+    position: fixed;
+    top: 0;
+    left: 0; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.night-modal .modal-content {
+    background: #1E1E1E;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.night-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.night-modal .modal-header h2 {
+    margin: 0;
+    color: #ffffff;
+}
+
+.night-modal .modal-header .close {
+    cursor: pointer;
+    font-size: 18px;
+    background: #f56565;
+    border: none;
+    color: #ffffff;
+}
+
+.night-modal .form-group {
+    margin-bottom: 15px;
+}
+
+.night-modal .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #bbbbbb;
+}
+
+.night-modal .form-group input,
+.night-modal .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    background: #2C2C2C;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.night-modal .form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.night-modal #imagePreview {
+    width: 100%;
+    height: 200px;
+    background: #2C2C2C;
+    border: 1px dashed #444;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #aaaaaa;
+    overflow: hidden;
+}
+
+.night-modal #imagePreview img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.night-modal .form-actions {
+    text-align: right;
+}
+
+.night-modal .form-actions button {
+    background: #1E88E5;
+}
+
+.night-modal .form-actions button:hover {
+    background: #1565C0;
 }
