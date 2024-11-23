@@ -21,7 +21,7 @@ def register(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username').strip().lower()
-            if len(username) <= 20:
+            if len(username) <= 15:
                 email = form.cleaned_data.get('email').strip().lower()
                 password = form.cleaned_data.get('password').strip()
                 otp = generate_otp()

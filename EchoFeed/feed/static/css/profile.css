@@ -116,9 +116,9 @@
 }
 
 .profile-second .posts-container img{
-    width: 17vw;
-    height: 17vw;
-    margin: 10px 25px;
+    width: 20vw;
+    height: 20vw;
+    margin: 10px 10px;
     border-radius: 10px;
     object-fit: cover;
 }

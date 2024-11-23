@@ -2,6 +2,9 @@
 {% load static %}
 {% block title %}Profile{% endblock %}
 {% block main %}
+<div class="loader" id="loader">
+    <img src="{% static 'images/loader.svg' %}" alt="Loading...">
+</div>
 <div class="profile-main">
     <div class="profile-first flex">
         <div class="profile-image flex items-center justify-center">
@@ -89,21 +92,23 @@
                 </div>
                 <div>
                     <label for="username" id="username-label">Username:</label>
-                    <input type="text" name="username" id="id_username" value="{{request.user}}">
+                    <input type="text" name="username" id="id_username" value="{{request.user}}" maxlength="15">
                 </div>
                 <div>
                     <label for="nickname">Nickname:</label>
-                    <input type="text" name="nickname" id="nickname" value="{{profile.nickname}}">
+                    <input type="text" name="nickname" id="nickname" value="{{profile.nickname}}" maxlength="15">
                 </div>
                 <div>
                     <label for="bio">Bio:</label>
-                    <textarea name="bio" id="bio">{{profile.bio}}</textarea>
+                    <textarea name="bio" id="bio" maxlength="250">{{profile.bio}}</textarea>
                 </div>
                 <button type="submit" id="edit-profile">Save Changes</button>
             </form>
         </div>
     </div>
-    
+</div>
+<div id="alertBox" class="alert-box">
+    {% comment %} This is an alert message! {% endcomment %}
 </div>
 {% endblock %}
 {% block js %}
@@ -127,10 +132,12 @@
             }
         });
     });
+    $('#loader').hide();
     const checkUsernameUrl = "{% url 'check_username' %}";
     const csrfToken = "{{ csrf_token }}";
     const updateProfileUrl = "{% url 'feed:update_profile' %}";
 </script>
+<script src="{% static 'js/showAlert.js' %}"></script>
 <script src="{% static 'js/checkUsername.js' %}"></script>
 <script src="{% static 'js/editProfile.js' %}"></script>
 {% endblock %}

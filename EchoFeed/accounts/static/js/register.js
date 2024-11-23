@@ -30,14 +30,10 @@ $(document).ready(function () {
                     window.location.href = verifyOtpUrl
                 } else if (res.username_is_long) {
                     $('.loader').hide();
-                    $('#username-label').text("Your username should be less than or equal to 20 charaters");
+                    $('#username-label').text("Your username should be less than or equal to 15 charaters");
                 } else {
                     $('.loader').hide();
                     let errors = res.errors;
-                    for(let error in errors){
-                        console.log(errors[error][0]);
-                        
-                    }
                     showAlert(errors)
                 }
             }
