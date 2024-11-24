@@ -96,7 +96,7 @@
 </div>
 <div class="night-modal">
     <!-- Modal -->
-    <div class="modal" id="uploadModal">
+    <div class="modal" id="uploadModal" style="display:none;">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Upload Post</h2>
@@ -126,7 +126,6 @@
 {% endblock %}
 {% block js %}
 <script>
-    $('#uploadModal').fadeOut();
     document.addEventListener("DOMContentLoaded", () => {
         const editButton = document.querySelector(".buttons button:first-child");
         const modal = document.getElementById("editProfileModal");
