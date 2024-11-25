@@ -1,0 +1,149 @@
+/* Modal Styles */
+/* Search All Results Container */
+.search-modal .search-all-results {
+    max-height: 370px; /* Set maximum height for the results container */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    margin-top: 10px; /* Space above the results */
+  }
+  
+  /* Scrollbar Styling */
+  .search-modal .search-all-results::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+  
+  .search-modal .search-all-results::-webkit-scrollbar-thumb {
+    background: #555; /* Dark color for the scrollbar */
+    border-radius: 4px; /* Rounded scrollbar for a modern feel */
+  }
+  
+  .search-modal .search-all-results::-webkit-scrollbar-thumb:hover {
+    background: #777; /* Slightly lighter on hover */
+  }
+  
+  .search-modal .search-all-results::-webkit-scrollbar-track {
+    background: #2C2C2C; /* Match the background of the container */
+  }
+  
+.search-modal .modal {
+    display: flex;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.search-modal .modal-content {
+    background: #1E1E1E;
+    padding: 20px;
+    border-radius: 8px;
+    width: 70%;
+    height: 70%;
+    max-width: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.search-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.search-modal .modal-header h2 {
+    margin: 0;
+    color: #ffffff;
+}
+
+.search-modal .modal-header .close {
+    cursor: pointer;
+    font-size: 24px;
+    padding: 5px 15px;
+    border-radius: 8px;
+    background: #333333; /* Dark gray background */
+    border: none;
+    color: #ffffff;
+}
+
+.search-modal .modal-body {
+    margin-top: 15px;
+}
+
+.search-modal .modal-body input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-size: 14px;
+    background: #2C2C2C;
+    color: #ffffff;
+}
+
+.search-modal .modal-body input::placeholder {
+    color: #bbbbbb;
+}
+
+.search-modal .modal-body #searchResults {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #dddddd;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #2C2C2C;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Search Result Container */
+.search-modal .search-result {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #2C2C2C; /* Dark background for results */
+    border: 1px solid #444; /* Border to differentiate result */
+    border-radius: 8px;
+    margin-top: 10px; /* Space between results */
+    transition: background 0.3s ease; /* Smooth hover effect */
+  }
+  
+  /* Hover Effect */
+  .search-modal .search-result:hover {
+    background: #3A3A3A; /* Slightly lighter on hover */
+    cursor: pointer;
+  }
+  
+  /* User Details Container */
+  .search-modal .user-details {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between image and text */
+  }
+  
+  /* User Image */
+  .search-modal .user-details .user-image img {
+    width: 50px; /* Image size */
+    height: 50px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover; /* Ensure proper image cropping */
+    border: 2px solid #555; /* Optional border for image */
+  }
+  
+  /* Other Details */
+  .search-modal .user-details .other-detail p {
+    margin: 0;
+    color: #ffffff; /* Light text for night mode */
+    font-size: 14px; /* Text size */
+    line-height: 1.4; /* Spacing between lines */
+  }
+  
+  .search-modal .user-details .other-detail p:first-child {
+    font-weight: bold; /* Bold for username */
+    font-size: 16px;
+    color: #E3E3E3; /* Slightly lighter for emphasis */
+  }
+  
+  .search-modal .user-details .other-detail p:last-child {
+    font-style: italic; /* Italic for nickname */
+    color: #B3B3B3; /* Muted color */
+  }
+  

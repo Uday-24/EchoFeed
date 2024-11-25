@@ -9,11 +9,11 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
-        .night-modal {
+        .search-modal {
             font-family: Arial, sans-serif;
         }
 
-        .night-modal button {
+        .search-modal button {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -23,25 +23,27 @@
             font-size: 14px;
         }
 
-        .night-modal button:hover {
+        .search-modal button:hover {
             background: #1565C0;
         }
 
-        /* Modal styles */
-        .night-modal .modal {
+        /* Modal Styles */
+        .search-modal .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
+            /* Darker overlay */
             justify-content: center;
             align-items: center;
         }
 
-        .night-modal .modal-content {
+        .search-modal .modal-content {
             background: #1E1E1E;
+            /* Dark background for modal */
             padding: 20px;
             border-radius: 8px;
             width: 90%;
@@ -49,19 +51,20 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
-        .night-modal .modal-header {
+        .search-modal .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
         }
 
-        .night-modal .modal-header h2 {
+        .search-modal .modal-header h2 {
             margin: 0;
             color: #ffffff;
+            /* Light text color */
         }
 
-        .night-modal .modal-header .close {
+        .search-modal .modal-header .close {
             cursor: pointer;
             font-size: 18px;
             background: none;
@@ -69,135 +72,100 @@
             color: #ffffff;
         }
 
-        .night-modal .form-group {
-            margin-bottom: 15px;
+        .search-modal .modal-body {
+            margin-top: 15px;
         }
 
-        .night-modal .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #bbbbbb;
-        }
-
-        .night-modal .form-group input,
-        .night-modal .form-group textarea {
+        .search-modal .modal-body input {
             width: 100%;
             padding: 10px;
-            background: #2C2C2C;
             border: 1px solid #444;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 14px;
-            color: #ffffff;
-        }
-
-        .night-modal .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .night-modal #imagePreview {
-            width: 100%;
-            height: 200px;
             background: #2C2C2C;
-            border: 1px dashed #444;
+            /* Dark input background */
+            color: #ffffff;
+            /* Light input text color */
+        }
+
+        .search-modal .modal-body input::placeholder {
+            color: #bbbbbb;
+            /* Light placeholder text */
+        }
+
+        .search-modal .modal-body #searchResults {
             margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-size: 14px;
-            color: #aaaaaa;
-            overflow: hidden;
-        }
-
-        .night-modal #imagePreview img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .night-modal .form-actions {
-            text-align: right;
-        }
-
-        .night-modal .form-actions button {
-            background: #1E88E5;
-        }
-
-        .night-modal .form-actions button:hover {
-            background: #1565C0;
+            color: #dddddd;
+            /* Light text for results */
+            max-height: 200px;
+            overflow-y: auto;
+            background: #2C2C2C;
+            /* Dark background for results */
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 10px;
         }
     </style>
 </head>
 
 <body>
-    <div class="night-modal">
-        <button id="openModal">Upload Post (Night Mode)</button>
+    <div class="search-modal">
+        <button id="openSearchModal">Search</button>
 
         <!-- Modal -->
-        <div class="modal" id="uploadModal">
+        <div class="modal" id="searchModal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Upload Post</h2>
-                    <button class="close" id="closeModal">&times;</button>
+                    <h2>Search</h2>
+                    <button class="close" id="closeSearchModal">&times;</button>
                 </div>
-                <form id="uploadForm">
-                    <div class="form-group">
-                        <label for="postImage">Image</label>
-                        <input type="file" id="postImage" name="image" accept="image/*" required>
-                        <div id="imagePreview">Image preview will appear here</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="postCaption">Caption</label>
-                        <textarea id="postCaption" name="caption" placeholder="Write a caption..." required></textarea>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit">Upload</button>
-                    </div>
-                </form>
+                <div class="modal-body">
+                    <input type="text" id="searchInput" placeholder="Type to search..." />
+                    <div id="searchResults">Search results will appear here.</div>
+                </div>
             </div>
         </div>
     </div>
 
 
+
     <script>
         $(document).ready(function () {
-            // Open modal
-            $('#openModal').on('click', function () {
-                $('#uploadModal').fadeIn();
+            // Open the modal
+            $('#openSearchModal').on('click', function () {
+                $('#searchModal').fadeIn();
             });
 
-            // Close modal
-            $('#closeModal').on('click', function () {
-                $('#uploadModal').fadeOut();
+            // Close the modal
+            $('#closeSearchModal').on('click', function () {
+                $('#searchModal').fadeOut();
             });
 
             // Close modal when clicking outside
             $(window).on('click', function (e) {
-                if ($(e.target).is('#uploadModal')) {
-                    $('#uploadModal').fadeOut();
+                if ($(e.target).is('#searchModal')) {
+                    $('#searchModal').fadeOut();
                 }
             });
 
-            // Image preview functionality
-            $('#postImage').on('change', function () {
-                const file = this.files[0];
-                const reader = new FileReader();
+            // Search bar functionality
+            $('#searchInput').on('input', function () {
+                const query = $(this).val().toLowerCase();
 
-                if (file) {
-                    reader.onload = function (e) {
-                        $('#imagePreview').html(`<img src="${e.target.result}" alt="Image Preview">`);
-                    };
-                    reader.readAsDataURL(file);
+                if (query.length === 0) {
+                    $('#searchResults').html('Search results will appear here.');
                 } else {
-                    $('#imagePreview').html('Image preview will appear here');
-                }
-            });
+                    // Example: Dummy search data
+                    const items = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grapes'];
 
-            // Form submission
-            $('#uploadForm').on('submit', function (e) {
-                e.preventDefault();
-                alert('Post uploaded successfully!');
-                $('#uploadModal').fadeOut();
+                    const results = items.filter(item => item.toLowerCase().includes(query));
+                    if (results.length > 0) {
+                        $('#searchResults').html(results.map(item => `<div>${item}</div>`).join(''));
+                    } else {
+                        $('#searchResults').html('No results found.');
+                    }
+                }
             });
         });
 

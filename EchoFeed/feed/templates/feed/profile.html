@@ -16,8 +16,13 @@
                     <p>{{profile.user.username}}</p>
                 </div>
                 <div class="buttons">
+                    {% if request.path == '/profile/' %}
                     <button>Edit profile</button>
                     <button><i class="fa-solid fa-cog"></i></button>
+                    {% else %}
+                    <button>Follow</button>
+                    <button><i class="fa-solid fa-ellipsis"></i></button>
+                    {% endif %}
                 </div>
             </div>
             <div class="flex post-details">
@@ -55,9 +60,13 @@
     <hr>
     <div class="profile-second">
         <div class="profile-second-titles flex items-center justify-center">
+            {% if request.path == '/profile/' %}
             <button id="openModal" class="">Create</button>
+            {% endif %}
             <button class="active-btn">Posts</button>
+            {% if request.path == '/profile/' %}
             <button class="">Saved</button>
+            {% endif %}
         </div>
         <div class="posts-container">
             {% for post in myPosts %}
@@ -67,6 +76,7 @@
             {% endfor %}
         </div>
     </div>
+    {% if request.path == '/profile/' %}
     <div id="editProfileModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
@@ -93,7 +103,9 @@
             </form>
         </div>
     </div>
+    {% endif %}
 </div>
+{% if request.path == '/profile/' %}
 <div class="night-modal">
     <!-- Modal -->
     <div class="modal" id="uploadModal" style="display:none;">
@@ -120,6 +132,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 <div id="alertBox" class="alert-box">
     {% comment %} This is an alert message! {% endcomment %}
 </div>

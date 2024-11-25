@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.serializers import serialize
 
 from accounts.models import UserProfile
 from posts.models import UserPosts
@@ -62,3 +63,23 @@ def update_profile(request):
         
     except Exception as e:
         print(f"Exception-------------->{e}")
+
+def profile_search(request):
+
+    query = request.GET.get('query')
+    profiles = UserProfile.objects.filter(user__username__icontains=query).values('id', 'user__username', 'profile_image', 'nickname')
+    if profiles.exists():
+        data = list(profiles)
+        return JsonResponse({'res': data}, safe=False)
+    else:
+        return JsonResponse({'no_record_found': True})
+    
+def user_profile(request, user):
+    profile = UserProfile.objects.get(user__username = user)
+    print(profile)
+    posts = UserPosts.objects.filter(user__username = user).order_by("-creation_time")
+    context = {
+        "profile": profile,
+        "myPosts": posts,
+    }
+    return render(request, 'feed/profile.html', context)

@@ -7,11 +7,30 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
     <link rel="stylesheet" href="{% static "css/profile.css" %}">
+    <link rel="stylesheet" href="{% static "css/searchModal.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <div class="container">
+        <div class="search-modal">
+            <!-- Modal -->
+            <div class="modal" id="searchModal" style="display:none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Search</h2>
+                        <button class="close" id="closeSearchModal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" id="searchInput" placeholder="Type to search..." />
+                        <div id="searchResults">Search results will appear here.</div>
+                        <div class="search-all-results">
+                           
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="sidebar">
             <h1 class="sidebar-title">EchoFeed</h1>
             <ul class="menu">
@@ -21,9 +40,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <button id="openSearchModal" class="open-search-modal">
                         <i class="fa-solid fa-search"></i> Search
-                    </a>
+                    </button>
                 </li>
                 <li>
                     <a href="#">
@@ -52,9 +71,9 @@
             <a href="{% url 'feed:index' %}" class="bottom-icon {% if request.path == '/' %}active-link{% endif %}">
                 <i class="fa-solid fa-house"></i>
             </a>
-            <a href="#">
+            <button id="openSearchModal2" class="open-search-modal">
                 <i class="fa-solid fa-search"></i>
-            </a>
+            </button>
             <a href="#">
                 <i class="fa-solid fa-compass"></i>
             </a>
@@ -72,6 +91,10 @@
         {% endblock %}
         </div>
     </div>
+    <script>
+        const searchUrl = "{% url 'feed:profile_search' %}"
+    </script>
+    <script src="{% static "js/searchModal.js" %}"></script>
     {% block js %}
     {% endblock %}
 </body>
