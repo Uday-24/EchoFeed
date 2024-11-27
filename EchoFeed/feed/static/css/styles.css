@@ -248,6 +248,12 @@ body {
     color: #00c8ff;
 }
 
+.profile-info .buttons button.unfollow-btn{
+    background: transparent;
+    border: 1px solid silver;
+}
+
+
 
 @media (min-width: 1000px) {
     .bottom-bar{

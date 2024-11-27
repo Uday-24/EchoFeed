@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.serializers import serialize
 
-from accounts.models import UserProfile
+from accounts.models import UserProfile, Follow
 from posts.models import UserPosts
 # Create your views here.
 
@@ -76,10 +76,40 @@ def profile_search(request):
     
 def user_profile(request, user):
     profile = UserProfile.objects.get(user__username = user)
-    print(profile)
     posts = UserPosts.objects.filter(user__username = user).order_by("-creation_time")
+    follows = False
+    if Follow.objects.filter(follower__user__username=request.user.username, following__user__username=user).exists():
+        follows = True
     context = {
         "profile": profile,
         "myPosts": posts,
+        "follows": follows,
     }
     return render(request, 'feed/profile.html', context)
+
+def follow(request):
+    try:
+        if request.method == "POST":
+            follower_name = request.user.username
+            following_name = request.POST.get('following')
+
+            follower = UserProfile.objects.get(user__username = follower_name)
+            following = UserProfile.objects.get(user__username = following_name)
+        
+            Follow.objects.create(follower=follower, following=following)
+
+            return JsonResponse({'success': True})
+    except:
+            return JsonResponse({'success': False})
+
+    
+    return HttpResponse("Invalid request")
+        
+
+def unfollow(request):
+    if request.method == "POST":
+        following = request.POST.get('following')
+        follower = request.user.username
+        data = Follow.objects.get(follower__user__username=follower, following__user__username=following)
+        data.delete()
+        return JsonResponse({'success': True})

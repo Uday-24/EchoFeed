@@ -13,14 +13,20 @@
         <div class="profile-info">
             <div class="flex items-center unm-btn-div">
                 <div class="username">
-                    <p>{{profile.user.username}}</p>
+                    <p id="profileUsername">{{profile.user.username}}</p>
                 </div>
                 <div class="buttons">
                     {% if request.path == '/profile/' %}
                     <button>Edit profile</button>
                     <button><i class="fa-solid fa-cog"></i></button>
                     {% else %}
-                    <button>Follow</button>
+                    {% if follows %}
+                    <button id="unfollowBtn" class="unfollow-btn">Unfollow</button>
+                    <button id="followBtn" style="display: none;">Follow</button>
+                    {% else %}
+                    <button id="followBtn">Follow</button>
+                    <button class="unfollow-btn" style="display: none;">Unfollow</button>
+                    {% endif %}
                     <button><i class="fa-solid fa-ellipsis"></i></button>
                     {% endif %}
                 </div>
@@ -132,6 +138,7 @@
         </div>
     </div>
 </div>
+
 {% endif %}
 <div id="alertBox" class="alert-box">
     {% comment %} This is an alert message! {% endcomment %}
@@ -139,6 +146,7 @@
 {% endblock %}
 {% block js %}
 <script>
+    {% if request.path == '/profile/' %}
     document.addEventListener("DOMContentLoaded", () => {
         const editButton = document.querySelector(".buttons button:first-child");
         const modal = document.getElementById("editProfileModal");
@@ -151,21 +159,27 @@
         closeButton.addEventListener("click", () => {
             modal.classList.add("hidden");
         });
-
+        
         modal.addEventListener("click", (event) => {
             if (event.target === modal) {
                 modal.classList.add("hidden");
             }
         });
     });
+    {% endif %}
     $('#loader').hide();
     const checkUsernameUrl = "{% url 'check_username' %}";
     const csrfToken = "{{ csrf_token }}";
     const updateProfileUrl = "{% url 'feed:update_profile' %}";
     const uploadPostUrl = "{% url 'posts:upload_post' %}";
+    const followUrl = "{% url 'feed:follow' %}";
+    const unfollowUrl = "{% url 'feed:unfollow' %}";
 </script>
 <script src="{% static 'js/showAlert.js' %}"></script>
+{% if request.path == '/profile/' %}
 <script src="{% static 'js/checkUsername.js' %}"></script>
 <script src="{% static 'js/editProfile.js' %}"></script>
 <script src="{% static 'js/postModal.js' %}"></script>
+{% endif %}
+<script src="{% static 'js/followUnfollow.js' %}"></script>
 {% endblock %}
