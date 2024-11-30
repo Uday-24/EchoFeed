@@ -1,175 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Post Modal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Night Mode Modal</title>
+  <style>
+    /* General Night Mode */
+    body {
+      background: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <style>
-        .search-modal {
-            font-family: Arial, sans-serif;
-        }
+    /* Buttons */
+    .follower-modal-button {
+      margin: 10px;
+      padding: 10px 20px;
+      background: #1e88e5;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-        .search-modal button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background: #1E88E5;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
-        }
+    .follower-modal-button:hover {
+      background: #1565c0;
+    }
 
-        .search-modal button:hover {
-            background: #1565C0;
-        }
+    /* Modal */
+    .follower-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
 
-        /* Modal Styles */
-        .search-modal .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            /* Darker overlay */
-            justify-content: center;
-            align-items: center;
-        }
+    .follower-modal-content {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+    }
 
-        .search-modal .modal-content {
-            background: #1E1E1E;
-            /* Dark background for modal */
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
+    .follower-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #ffffff;
+    }
 
-        .search-modal .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+    .follower-modal-title {
+      margin-bottom: 20px;
+    }
 
-        .search-modal .modal-header h2 {
-            margin: 0;
-            color: #ffffff;
-            /* Light text color */
-        }
+    /* Modal List */
+    .follower-modal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
 
-        .search-modal .modal-header .close {
-            cursor: pointer;
-            font-size: 18px;
-            background: none;
-            border: none;
-            color: #ffffff;
-        }
+    .follower-modal-item {
+      display: flex;
+      align-items: center;
+      background: #292929;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    }
 
-        .search-modal .modal-body {
-            margin-top: 15px;
-        }
+    .follower-modal-item img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
 
-        .search-modal .modal-body input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #444;
-            border-radius: 5px;
-            font-size: 14px;
-            background: #2C2C2C;
-            /* Dark input background */
-            color: #ffffff;
-            /* Light input text color */
-        }
+    .follower-modal-item .details {
+      flex: 1;
+    }
 
-        .search-modal .modal-body input::placeholder {
-            color: #bbbbbb;
-            /* Light placeholder text */
-        }
+    .follower-modal-item .details p {
+      margin: 5px 0;
+    }
 
-        .search-modal .modal-body #searchResults {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #dddddd;
-            /* Light text for results */
-            max-height: 200px;
-            overflow-y: auto;
-            background: #2C2C2C;
-            /* Dark background for results */
-            border: 1px solid #444;
-            border-radius: 5px;
-            padding: 10px;
-        }
-    </style>
+    .follower-modal-item button {
+      background: #1e88e5;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 10px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .follower-modal-item button:hover {
+      background: #1565c0;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="search-modal">
-        <button id="openSearchModal">Search</button>
+  <!-- Buttons to open modals -->
+  <button class="follower-modal-button" id="showFollowers">Show Followers</button>
+  <button class="follower-modal-button" id="showFollowing">Show Following</button>
 
-        <!-- Modal -->
-        <div class="modal" id="searchModal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Search</h2>
-                    <button class="close" id="closeSearchModal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <input type="text" id="searchInput" placeholder="Type to search..." />
-                    <div id="searchResults">Search results will appear here.</div>
-                </div>
-            </div>
-        </div>
+  <!-- Modal -->
+  <div class="follower-modal" id="followerModal">
+    <div class="follower-modal-content">
+      <span class="follower-modal-close">&times;</span>
+      <h2 class="follower-modal-title" id="followerModalTitle"></h2>
+      <div class="follower-modal-list" id="followerModalList"></div>
     </div>
+  </div>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      const followers = [
+        { img: "https://via.placeholder.com/50", username: "User1", nickname: "u1" },
+        { img: "https://via.placeholder.com/50", username: "User2", nickname: "u2" },
+        { img: "https://via.placeholder.com/50", username: "User3", nickname: "u3" },
+      ];
 
+      const following = [
+        { img: "https://via.placeholder.com/50", username: "UserA", nickname: "ua" },
+        { img: "https://via.placeholder.com/50", username: "UserB", nickname: "ub" },
+        { img: "https://via.placeholder.com/50", username: "UserC", nickname: "uc" },
+      ];
 
-    <script>
-        $(document).ready(function () {
-            // Open the modal
-            $('#openSearchModal').on('click', function () {
-                $('#searchModal').fadeIn();
-            });
+      const $modal = $("#followerModal");
+      const $modalTitle = $("#followerModalTitle");
+      const $modalList = $("#followerModalList");
 
-            // Close the modal
-            $('#closeSearchModal').on('click', function () {
-                $('#searchModal').fadeOut();
-            });
-
-            // Close modal when clicking outside
-            $(window).on('click', function (e) {
-                if ($(e.target).is('#searchModal')) {
-                    $('#searchModal').fadeOut();
-                }
-            });
-
-            // Search bar functionality
-            $('#searchInput').on('input', function () {
-                const query = $(this).val().toLowerCase();
-
-                if (query.length === 0) {
-                    $('#searchResults').html('Search results will appear here.');
-                } else {
-                    // Example: Dummy search data
-                    const items = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grapes'];
-
-                    const results = items.filter(item => item.toLowerCase().includes(query));
-                    if (results.length > 0) {
-                        $('#searchResults').html(results.map(item => `<div>${item}</div>`).join(''));
-                    } else {
-                        $('#searchResults').html('No results found.');
-                    }
-                }
-            });
+      // Function to open modal
+      function openModal(title, list) {
+        $modalTitle.text(title);
+        $modalList.empty();
+        list.forEach(user => {
+          $modalList.append(`
+            <div class="follower-modal-item">
+              <img src="${user.img}" alt="${user.username}">
+              <div class="details">
+                <p><strong>${user.username}</strong></p>
+                <p>@${user.nickname}</p>
+              </div>
+              <button>Follow</button>
+            </div>
+          `);
         });
+        $modal.fadeIn();
+      }
 
-    </script>
+      // Event listeners
+      $("#showFollowers").on("click", function () {
+        openModal("Followers", followers);
+      });
+
+      $("#showFollowing").on("click", function () {
+        openModal("Following", following);
+      });
+
+      // Close modal
+      $(".follower-modal-close, .follower-modal").on("click", function (e) {
+        if (e.target === this) $modal.fadeOut();
+      });
+    });
+  </script>
 </body>
-
 </html>

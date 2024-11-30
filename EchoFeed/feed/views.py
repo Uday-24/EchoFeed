@@ -22,6 +22,7 @@ def profile(request):
     }
     return render(request, 'feed/profile.html', context)
 
+@login_required
 def update_profile(request):
     try:
         if request.method == "POST":
@@ -64,29 +65,38 @@ def update_profile(request):
     except Exception as e:
         print(f"Exception-------------->{e}")
 
+@login_required
 def profile_search(request):
+    try:
+        query = request.GET.get('query')
+        profiles = UserProfile.objects.filter(user__username__icontains=query).values('id', 'user__username', 'profile_image', 'nickname')
+        if profiles.exists():
+            data = list(profiles)
+            return JsonResponse({'res': data}, safe=False)
+        else:
+            return JsonResponse({'no_record_found': True})
+    except:
+            return JsonResponse({'no_record_found': True})
 
-    query = request.GET.get('query')
-    profiles = UserProfile.objects.filter(user__username__icontains=query).values('id', 'user__username', 'profile_image', 'nickname')
-    if profiles.exists():
-        data = list(profiles)
-        return JsonResponse({'res': data}, safe=False)
-    else:
-        return JsonResponse({'no_record_found': True})
     
+@login_required
 def user_profile(request, user):
-    profile = UserProfile.objects.get(user__username = user)
-    posts = UserPosts.objects.filter(user__username = user).order_by("-creation_time")
-    follows = False
-    if Follow.objects.filter(follower__user__username=request.user.username, following__user__username=user).exists():
-        follows = True
-    context = {
-        "profile": profile,
-        "myPosts": posts,
-        "follows": follows,
-    }
-    return render(request, 'feed/profile.html', context)
+    try:
+        profile = UserProfile.objects.get(user__username = user)
+        posts = UserPosts.objects.filter(user__username = user).order_by("-creation_time")
+        follows = False
+        if Follow.objects.filter(follower__user__username=request.user.username, following__user__username=user).exists():
+            follows = True
+        context = {
+            "profile": profile,
+            "myPosts": posts,
+            "follows": follows,
+        }
+        return render(request, 'feed/profile.html', context)
+    except:
+        return HttpResponse("Invalid request")
 
+@login_required
 def follow(request):
     try:
         if request.method == "POST":
@@ -106,31 +116,39 @@ def follow(request):
     return HttpResponse("Invalid request")
         
 
+@login_required
 def unfollow(request):
-    if request.method == "POST":
-        following = request.POST.get('following')
-        follower = request.user.username
-        data = Follow.objects.get(follower__user__username=follower, following__user__username=following)
-        data.delete()
-        return JsonResponse({'success': True})
-    
+    try:
+        if request.method == "POST":
+            following = request.POST.get('following')
+            follower = request.user.username
+            data = Follow.objects.get(follower__user__username=follower, following__user__username=following)
+            data.delete()
+            return JsonResponse({'success': True})
+    except:
+        return HttpResponse("Invalid request")
 
+@login_required
 def show_follow(request):
-    request_type = request.GET.get('request_type')
-    username = request.GET.get('username')
-    if username == '':
-        username = request.user.username
+    try:
+        request_type = request.GET.get('request_type')
+        username = request.GET.get('username')
+        if username == '':
+            username = request.user.username
 
-    if request_type == 'follower_request':
-        follower = Follow.objects.filter(following__user__username=username)
-        data = [{'id': f.id, 'username': f.follower.user.username, 'nickname': f.follower.nickname, 'img': f.follower.profile_image.url} for f in follower]
-        return JsonResponse({'followers': data}, safe=False)
-    
-    elif request_type == 'following_request':
-        following = Follow.objects.filter(follower__user__username = username)
-        data = [{'id': f.id, 'username': f.following.user.username, 'nickname': f.following.nickname, 'img': f.following.profile_image.url} for f in following]
-        return JsonResponse({'followings': data}, safe=False)
+        if request_type == 'follower_request':
+            follower = Follow.objects.filter(following__user__username=username)
+            data = [{'id': f.id, 'username': f.follower.user.username, 'nickname': f.follower.nickname, 'img': f.follower.profile_image.url} for f in follower]
+            return JsonResponse({'followers': data}, safe=False)
+        
+        elif request_type == 'following_request':
+            following = Follow.objects.filter(follower__user__username = username)
+            data = [{'id': f.id, 'username': f.following.user.username, 'nickname': f.following.nickname, 'img': f.following.profile_image.url} for f in following]
+            return JsonResponse({'followings': data}, safe=False)
 
-    else:
-        print("Invalid request")
-    return JsonResponse({'success':True})
+        else:
+            print("Invalid request")
+        return JsonResponse({'success':True})
+
+    except:
+        return HttpResponse("Invalid request")
