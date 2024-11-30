@@ -113,3 +113,24 @@ def unfollow(request):
         data = Follow.objects.get(follower__user__username=follower, following__user__username=following)
         data.delete()
         return JsonResponse({'success': True})
+    
+
+def show_follow(request):
+    request_type = request.GET.get('request_type')
+    username = request.GET.get('username')
+    if username == '':
+        username = request.user.username
+
+    if request_type == 'follower_request':
+        follower = Follow.objects.filter(following__user__username=username)
+        data = [{'id': f.id, 'username': f.follower.user.username, 'nickname': f.follower.nickname, 'img': f.follower.profile_image.url} for f in follower]
+        return JsonResponse({'followers': data}, safe=False)
+    
+    elif request_type == 'following_request':
+        following = Follow.objects.filter(follower__user__username = username)
+        data = [{'id': f.id, 'username': f.following.user.username, 'nickname': f.following.nickname, 'img': f.following.profile_image.url} for f in following]
+        return JsonResponse({'followings': data}, safe=False)
+
+    else:
+        print("Invalid request")
+    return JsonResponse({'success':True})

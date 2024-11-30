@@ -49,7 +49,7 @@ body {
     margin: 15px 0;
 }
 
-.menu li button{
+.menu li button {
     background: transparent;
     border: none;
     color: #ffffff;
@@ -130,22 +130,23 @@ body {
     padding: 20px;
 }
 
-.flex{
+.flex {
     display: flex;
 }
-.space-between{
+
+.space-between {
     justify-content: space-between;
 }
 
-.items-center{
+.items-center {
     align-items: center;
 }
 
-.justify-center{
+.justify-center {
     justify-content: center;
 }
 
-.space-around{
+.space-around {
     justify-content: space-around;
 }
 
@@ -169,22 +170,30 @@ body {
 }
 
 .loader {
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw; /* Full width of the viewport */
-    height: 100vh; /* Full height of the viewport */
-    background-color: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-    z-index: 9999; /* Ensure the loader is on top of other content */
+    width: 100vw;
+    /* Full width of the viewport */
+    height: 100vh;
+    /* Full height of the viewport */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black background with 0.5 opacity */
+    z-index: 9999;
+    /* Ensure the loader is on top of other content */
     display: flex;
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
+    justify-content: center;
+    /* Center the content horizontally */
+    align-items: center;
+    /* Center the content vertically */
 }
 
 /* Loader Spinner Styles */
 .loader img {
-    width: 100px; /* Adjust size of the loader */
+    width: 100px;
+    /* Adjust size of the loader */
     height: 100px;
 }
 
@@ -207,7 +216,7 @@ body {
     z-index: 1000;
 }
 
-.bottom-bar button{
+.bottom-bar button {
     background: none;
     border: none;
     font-size: 14px;
@@ -248,21 +257,108 @@ body {
     color: #00c8ff;
 }
 
-.profile-info .buttons button.unfollow-btn{
+.profile-info .buttons button.unfollow-btn {
     background: transparent;
     border: 1px solid silver;
 }
 
+div#followerModal{
+    display: flex;
+}
 
+.follower-modal-button {
+    cursor: pointer;
+}
+
+/* Modal */
+.follower-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.follower-modal-content {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+}
+
+.follower-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.follower-modal-title {
+    margin-bottom: 20px;
+}
+
+/* Modal List */
+.follower-modal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.follower-modal-item {
+    display: flex;
+    align-items: center;
+    background: #292929;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.follower-modal-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.follower-modal-item .details {
+    flex: 1;
+}
+
+.follower-modal-item .details p {
+    margin: 5px 0;
+}
+
+.follower-modal-item button {
+    background: #1e88e5;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.follower-modal-item button:hover {
+    background: #1565c0;
+}
 
 @media (min-width: 1000px) {
-    .bottom-bar{
+    .bottom-bar {
         display: none;
     }
 }
 
-@media (max-width: 1000px){
-    .sidebar{
+@media (max-width: 1000px) {
+    .sidebar {
         display: none;
     }
 }

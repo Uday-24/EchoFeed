@@ -2,6 +2,9 @@
 {% load static %}
 {% block title %}Profile{% endblock %}
 {% block main %}
+{% for follower in followers %}
+{{follower.follower.user.username}}
+{% endfor %}
 <div class="loader" id="loader">
     <img src="{% static 'images/loader.svg' %}" alt="Loading...">
 </div>
@@ -39,12 +42,13 @@
                 </div>
                 <div class="followers">
                     <div class="info-div">
-                        <span class="numbers">{{profile.followers_count}}</span> <span class="btn-title">Followers</span>
+                        <span class="numbers show-follower">{{profile.followers_count}}</span> <span class="btn-title follower-modal-button" id="showFollowers">Followers
+                            </span>
                     </div class="info-div">
                 </div>
                 <div class="followings">
                     <div class="info-div">
-                        <span class="numbers">{{profile.following_count}}</span> <span class="btn-title">Followings</span>
+                        <span class="numbers show-following">{{profile.following_count}}</span> <span class="btn-title follower-modal-button" id="showFollowing">Following</span>
                     </div class="info-div">
                 </div>
             </div>
@@ -139,7 +143,16 @@
     </div>
 </div>
 
+  <!-- Modal -->
+  
 {% endif %}
+<div class="follower-modal" id="followerModal" style="display: none;">
+    <div class="follower-modal-content">
+        <span class="follower-modal-close">&times;</span>
+        <h2 class="follower-modal-title" id="followerModalTitle"></h2>
+        <div class="follower-modal-list" id="followerModalList"></div>
+    </div>
+</div>
 <div id="alertBox" class="alert-box">
     {% comment %} This is an alert message! {% endcomment %}
 </div>
@@ -174,6 +187,7 @@
     const uploadPostUrl = "{% url 'posts:upload_post' %}";
     const followUrl = "{% url 'feed:follow' %}";
     const unfollowUrl = "{% url 'feed:unfollow' %}";
+    const showFollow = "{% url 'feed:show_follow' %}";
 </script>
 <script src="{% static 'js/showAlert.js' %}"></script>
 {% if request.path == '/profile/' %}
@@ -182,4 +196,5 @@
 <script src="{% static 'js/postModal.js' %}"></script>
 {% endif %}
 <script src="{% static 'js/followUnfollow.js' %}"></script>
+<script src="{% static 'js/showFollow.js' %}"></script>
 {% endblock %}
