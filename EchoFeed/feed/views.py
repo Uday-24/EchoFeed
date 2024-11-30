@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -82,6 +82,8 @@ def profile_search(request):
 @login_required
 def user_profile(request, user):
     try:
+        if user == request.user.username:
+            return redirect('feed:profile')
         profile = UserProfile.objects.get(user__username = user)
         posts = UserPosts.objects.filter(user__username = user).order_by("-creation_time")
         follows = False
@@ -102,6 +104,9 @@ def follow(request):
         if request.method == "POST":
             follower_name = request.user.username
             following_name = request.POST.get('following')
+
+            if follower_name == following_name:
+                return HttpResponse("Invalid request")
 
             follower = UserProfile.objects.get(user__username = follower_name)
             following = UserProfile.objects.get(user__username = following_name)
