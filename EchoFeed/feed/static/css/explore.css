@@ -1,0 +1,116 @@
+.explore-h1 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Posts Grid */
+.posts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 0 20px;
+}
+
+.post {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 24vw;
+    height: 24vw;
+}
+
+.post:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.post img {
+    width: 100%; /* Same width for all images */
+    height: 100%;
+    display: block; /* Ensure no extra spacing below the image */
+    object-fit: cover; /* Maintain the image's quality */
+    cursor: pointer;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100vw; 
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.modal-content {
+    margin: 15% auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    width: 60%;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+
+/* Adjustments for Different Screen Sizes */
+@media (max-width: 1024px) { /* Tablets */
+    .posts {
+        padding: 0 15px;
+    }
+
+    .post {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 28vw;
+        height: 28vw;
+    }
+}
+
+@media (max-width: 768px) { /* Small Tablets */
+    .posts {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 528px) { /* Mobile Screens */
+    .posts {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 0 5px;
+    }
+
+   .explore-h1 {
+        font-size: 18px;
+    }
+}

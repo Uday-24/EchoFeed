@@ -26,4 +26,4 @@ class UserPosts(models.Model):
 
         super(UserPosts, self).save(*args, **kwargs)
     def __str__(self) -> str:
-        return f"{self.user.username}'s post created at {self.creation_time}"
+        return f"{self.user.username}'s post"

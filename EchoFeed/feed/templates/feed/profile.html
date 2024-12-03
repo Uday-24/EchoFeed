@@ -58,7 +58,7 @@
                 {{profile.nickname}}
                 {% endif %}
             </div>
-            {% if profile.bio != '' and profile.bio != None %}
+            {% if profile.bio != '' and profile.bio != 'None' and profile.bio != None %}
             <div class="bio">
                 <p>{{profile.bio}}</p>
             </div>

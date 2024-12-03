@@ -106,7 +106,7 @@ def follow(request):
             following_name = request.POST.get('following')
 
             if follower_name == following_name:
-                return HttpResponse("Invalid request")
+                return redirect("feed:profile")
 
             follower = UserProfile.objects.get(user__username = follower_name)
             following = UserProfile.objects.get(user__username = following_name)
@@ -157,3 +157,11 @@ def show_follow(request):
 
     except:
         return HttpResponse("Invalid request")
+    
+
+def explore(request):
+    random_posts = UserPosts.objects.filter(user__usersettings__is_private_account=False).order_by('?')[:5]
+    context = {
+        'random_posts': random_posts,
+    }
+    return render(request, 'feed/explore.html', context)

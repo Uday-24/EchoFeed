@@ -1,180 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Night Mode Modal</title>
-  <style>
-    /* General Night Mode */
-    body {
-      background: #121212;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-    }
-
-    /* Buttons */
-    .follower-modal-button {
-      margin: 10px;
-      padding: 10px 20px;
-      background: #1e88e5;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .follower-modal-button:hover {
-      background: #1565c0;
-    }
-
-    /* Modal */
-    .follower-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .follower-modal-content {
-      background: #1e1e1e;
-      padding: 20px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 500px;
-      text-align: center;
-      position: relative;
-    }
-
-    .follower-modal-close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 24px;
-      cursor: pointer;
-      color: #ffffff;
-    }
-
-    .follower-modal-title {
-      margin-bottom: 20px;
-    }
-
-    /* Modal List */
-    .follower-modal-list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .follower-modal-item {
-      display: flex;
-      align-items: center;
-      background: #292929;
-      padding: 10px;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-    }
-
-    .follower-modal-item img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 15px;
-    }
-
-    .follower-modal-item .details {
-      flex: 1;
-    }
-
-    .follower-modal-item .details p {
-      margin: 5px 0;
-    }
-
-    .follower-modal-item button {
-      background: #1e88e5;
-      border: none;
-      border-radius: 4px;
-      padding: 6px 10px;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    .follower-modal-item button:hover {
-      background: #1565c0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
 </head>
+
 <body>
-  <!-- Buttons to open modals -->
-  <button class="follower-modal-button" id="showFollowers">Show Followers</button>
-  <button class="follower-modal-button" id="showFollowing">Show Following</button>
+    <button>Show</button>
+    <!-- Modal -->
+    <div class="post-modal">
+        <!-- image -->
+        <div class="post-image">
+            <img src="" alt="Loading">
+        </div>
 
-  <!-- Modal -->
-  <div class="follower-modal" id="followerModal">
-    <div class="follower-modal-content">
-      <span class="follower-modal-close">&times;</span>
-      <h2 class="follower-modal-title" id="followerModalTitle"></h2>
-      <div class="follower-modal-list" id="followerModalList"></div>
-    </div>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      const followers = [
-        { img: "https://via.placeholder.com/50", username: "User1", nickname: "u1" },
-        { img: "https://via.placeholder.com/50", username: "User2", nickname: "u2" },
-        { img: "https://via.placeholder.com/50", username: "User3", nickname: "u3" },
-      ];
-
-      const following = [
-        { img: "https://via.placeholder.com/50", username: "UserA", nickname: "ua" },
-        { img: "https://via.placeholder.com/50", username: "UserB", nickname: "ub" },
-        { img: "https://via.placeholder.com/50", username: "UserC", nickname: "uc" },
-      ];
-
-      const $modal = $("#followerModal");
-      const $modalTitle = $("#followerModalTitle");
-      const $modalList = $("#followerModalList");
-
-      // Function to open modal
-      function openModal(title, list) {
-        $modalTitle.text(title);
-        $modalList.empty();
-        list.forEach(user => {
-          $modalList.append(`
-            <div class="follower-modal-item">
-              <img src="${user.img}" alt="${user.username}">
-              <div class="details">
-                <p><strong>${user.username}</strong></p>
-                <p>@${user.nickname}</p>
-              </div>
-              <button>Follow</button>
+        <!-- Comment -->
+        <div class="post-comment">
+            <!-- User Detail -->
+            <div class="user-detail">
+                <div class="details">
+                    <div class="user-image">
+                        <img src="pu.jpg" alt="">
+                    </div>
+                    <div class="other-detail">
+                        <strong><a href="">Username</a></strong>
+                        <button class="follow">Follow</button>
+                    </div>
+                </div>
             </div>
-          `);
-        });
-        $modal.fadeIn();
-      }
+            <hr>
+            <!-- Comments -->
+            <div class="comments">
+                <div class="user-detail">
+                    <div class="user-image">
+                        <img src="" alt="">
+                    </div>
+                    <div class="other-detail">
+                        <strong><a href="">Username</a></strong>
+                        <div class="comment">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt perspiciatis nobis maiores eius vitae eum nam repudiandae veniam quibusdam eos sint, magnam, molestias eligendi atque ab, cumque iure est esse?
+                        </div>
+                    </div>
+                </div>
+                <div class="user-detail">
+                    <div class="user-image">
+                        <img src="" alt="">
+                    </div>
+                    <div class="other-detail">
+                        <strong><a href="">Username</a></strong>
+                        <div class="comment">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt perspiciatis nobis maiores eius vitae eum nam repudiandae veniam quibusdam eos sint, magnam, molestias eligendi atque ab, cumque iure est esse?
+                        </div>
+                    </div>
+                </div>
+                <div class="user-detail">
+                    <div class="user-image">
+                        <img src="" alt="">
+                    </div>
+                    <div class="other-detail">
+                        <strong><a href="">Username</a></strong>
+                        <div class="comment">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt perspiciatis nobis maiores eius vitae eum nam repudiandae veniam quibusdam eos sint, magnam, molestias eligendi atque ab, cumque iure est esse?
+                        </div>
+                    </div>
+                </div>
+                <div class="user-detail">
+                    <div class="user-image">
+                        <img src="" alt="">
+                    </div>
+                    <div class="other-detail">
+                        <strong><a href="">Username</a></strong>
+                        <div class="comment">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt perspiciatis nobis maiores eius vitae eum nam repudiandae veniam quibusdam eos sint, magnam, molestias eligendi atque ab, cumque iure est esse?
+                        </div>
+                    </div>
+                </div>
+                <div class="user-detail">
+                    <div class="user-image">
+                        <img src="" alt="">
+                    </div>
+                    <div class="other-detail">
+                        <strong><a href="">Username</a></strong>
+                        <div class="comment">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt perspiciatis nobis maiores eius vitae eum nam repudiandae veniam quibusdam eos sint, magnam, molestias eligendi atque ab, cumque iure est esse?
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      // Event listeners
-      $("#showFollowers").on("click", function () {
-        openModal("Followers", followers);
-      });
-
-      $("#showFollowing").on("click", function () {
-        openModal("Following", following);
-      });
-
-      // Close modal
-      $(".follower-modal-close, .follower-modal").on("click", function (e) {
-        if (e.target === this) $modal.fadeOut();
-      });
-    });
-  </script>
+            <!-- Like Comment -->
+            <div class="like-comment">
+                <div class="buttons">
+                    <button class="like-button">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <button class="comment-button">
+                        <i class="fa-regular fa-comment"></i>
+                    </button>
+                    <button class="share-button">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                    <button class="save-post-button">
+                        <i class="fa-regular fa-bookmark"></i>
+                    </button>
+                </div>
+                <div class="make-comment">
+                    <input type="text">
+                    <button>Comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
