@@ -116,6 +116,9 @@
                 <button class="like-button">
                     <i class="fa-regular fa-heart"></i>
                 </button>
+                <button class="unlike-button">
+                    <i class="fa-solid fa-heart liked"></i>
+                </button>
                 <button class="comment-button">
                     <i class="fa-regular fa-comment"></i>
                 </button>
@@ -127,7 +130,7 @@
                 </button>
             </div>
             <div class="like-count">
-                <strong>50000 Likes</strong><br>
+                <strong></strong><span> Likes</span><br>
                 <small>25 November 2025</small>
             </div>
             <div class="make-comment">
@@ -144,10 +147,13 @@
     const showPost = "{% url 'feed:show_post' %}"
     const followUrl = "{% url 'feed:follow' %}";
     const unfollowUrl = "{% url 'feed:unfollow' %}";
+    const likeUrl = "{% url 'posts:like' %}";
+    const unlikeUrl = "{% url 'posts:unlike' %}";
     $.ajaxSetup({
         headers: { "X-CSRFToken": csrfToken }
     });
 </script>
 <script src="{% static 'js/handleFollowUnfollow.js' %}"></script>
+<script src="{% static 'js/handleLikeUnlike.js' %}"></script>
 <script src="{% static 'js/postClick.js' %}"></script>
 {% endblock %}

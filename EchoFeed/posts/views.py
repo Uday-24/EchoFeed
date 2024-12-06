@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import JsonResponse
-from .models import UserPosts
+from django.http import JsonResponse, HttpResponse
+from .models import UserPosts, Like
+from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -18,3 +19,39 @@ def upload_post(request):
             return JsonResponse({'invalid_req': True})
     else:
         return JsonResponse({'invalid_req': True})
+    
+def like(request):
+    try:
+        if request.method == 'POST':
+            post_id = request.POST.get('id')
+            username = request.user.username
+            post = UserPosts.objects.get(id=post_id)
+            user = User.objects.get(username=username)
+            like, created = Like.objects.get_or_create(user=user, post=post)
+            if created:
+                is_created = True
+            else:
+                is_created = True
+            data = {
+                'success': is_created,
+            }
+            return JsonResponse(data)
+        else:
+            return HttpResponse('Invalid request')
+    except:
+        return JsonResponse({'success': False})
+    
+def unlike(request):
+    try:
+        if request.method == 'POST':
+            post_id = request.POST.get('id')
+            user = User.objects.get(username=request.user.username)
+            post = UserPosts.objects.get(id=post_id)
+            unlike_obj = Like.objects.filter(user=user, post=post).first()
+            if unlike_obj:
+                unlike_obj.delete()
+                return JsonResponse({'success': True})
+            else:
+                return JsonResponse({'success': False})
+    except:
+        return HttpResponse('Invalid request')

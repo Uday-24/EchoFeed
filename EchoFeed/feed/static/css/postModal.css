@@ -158,6 +158,11 @@
     color: white;
     cursor: pointer;
 }
+
+.like-comment .buttons .liked{
+    color: rgb(255, 48, 48);
+}
+
 .like-comment .buttons button:last-child{
     margin-left: auto;
 }

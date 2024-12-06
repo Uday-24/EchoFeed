@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 import uuid
+
 # Create your models here.
 class UserPosts(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -10,6 +11,7 @@ class UserPosts(models.Model):
     slug = models.SlugField(unique=True)
     creation_time = models.DateTimeField(auto_now_add=True)
     reports = models.PositiveIntegerField(default=0)
+    like_count = models.PositiveIntegerField(default=0)
 
     def save(self, *args, **kwargs):
         # Generate a unique slug only if it is not already set
@@ -27,3 +29,14 @@ class UserPosts(models.Model):
         super(UserPosts, self).save(*args, **kwargs)
     def __str__(self) -> str:
         return f"{self.user.username}'s post"
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(UserPosts, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'post')
+
+    def __str__(self):
+        return f"{self.user.username} Liked 'id={self.post.id}' post"

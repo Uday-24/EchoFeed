@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.serializers import serialize
 
 from accounts.models import UserProfile, Follow
-from posts.models import UserPosts
+from posts.models import UserPosts, Like
 # Create your views here.
 
 @login_required
@@ -161,6 +161,7 @@ def show_follow(request):
 
 def explore(request):
     random_posts = UserPosts.objects.filter(user__usersettings__is_private_account=False).order_by('?')[:5]
+    # random_posts = UserPosts.objects.filter(id=20)
     context = {
         'random_posts': random_posts,
     }
@@ -169,15 +170,21 @@ def explore(request):
 def show_post(request):
     if request.GET.get('id'):
         id = request.GET.get('id')
-        data = UserPosts.objects.get(id=id)
-        profile_image = data.user.userprofile.profile_image.url
-        username = data.user.username
+        post = UserPosts.objects.get(id=id)
+        profile_image = post.user.userprofile.profile_image.url
+        likes = post.like_count
+        username = post.user.username
+        user = User.objects.get(username=request.user.username)
+        is_liked = Like.objects.filter(user=user, post=post).exists()
+
         is_follows = Follow.objects.filter(follower__user__username=request.user.username, following__user__username=username).exists()
         res = {
             'success': True,
             'profile_image': profile_image,
             'username': username,
             'follows': is_follows,
+            'likes':likes,
+            'is_liked':is_liked,
         }
 
         return JsonResponse(res)
