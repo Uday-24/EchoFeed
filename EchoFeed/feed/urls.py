@@ -13,4 +13,5 @@ urlpatterns = [
    path('unfollow/', views.unfollow, name="unfollow"),
    path('show_follow/', views.show_follow, name="show_follow"),
    path('explore/', views.explore, name="explore"),
+   path('show_post/', views.show_post, name="show_post"),
 ]

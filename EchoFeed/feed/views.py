@@ -165,3 +165,21 @@ def explore(request):
         'random_posts': random_posts,
     }
     return render(request, 'feed/explore.html', context)
+
+def show_post(request):
+    if request.GET.get('id'):
+        id = request.GET.get('id')
+        data = UserPosts.objects.get(id=id)
+        profile_image = data.user.userprofile.profile_image.url
+        username = data.user.username
+        is_follows = Follow.objects.filter(follower__user__username=request.user.username, following__user__username=username).exists()
+        res = {
+            'success': True,
+            'profile_image': profile_image,
+            'username': username,
+            'follows': is_follows,
+        }
+
+        return JsonResponse(res)
+    else:
+        return HttpResponse('Invalid Request')
