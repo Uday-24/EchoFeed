@@ -96,14 +96,14 @@
     </div>
     <script>
         const csrfToken = "{{ csrf_token }}";
-        const showPost = "{% url 'feed:show_post' %}"
+        const showPost = "{% url 'feed:show_post' %}";
         const followUrl = "{% url 'feed:follow' %}";
         const unfollowUrl = "{% url 'feed:unfollow' %}";
         const likeUrl = "{% url 'posts:like' %}";
         const unlikeUrl = "{% url 'posts:unlike' %}";
-        const submitCommentUrl = "{% url 'posts:submit_comment' %}"
-        const currentUsername = '{{user.username}}'
-        const searchUrl = "{% url 'feed:profile_search' %}"
+        const submitCommentUrl = "{% url 'posts:submit_comment' %}";
+        const currentUsername = '{{user.username}}';
+        const searchUrl = "{% url 'feed:profile_search' %}";
         const checkUsernameUrl = "{% url 'check_username' %}";
         const updateProfileUrl = "{% url 'feed:update_profile' %}";
         const uploadPostUrl = "{% url 'posts:upload_post' %}";
