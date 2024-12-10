@@ -81,7 +81,7 @@
         <div class="posts-container">
             {% for post in myPosts %}
             <div class="post">
-                <img src="{{post.post_img.url}}" alt="">
+                <img class="post-img" id="{{post.id}}" src="{{post.post_img.url}}" alt="">
             </div>
             {% endfor %}
         </div>
@@ -115,6 +115,9 @@
     </div>
     {% endif %}
 </div>
+
+{% include "post.html" %}
+
 {% if request.path == '/profile/' %}
 <div class="night-modal">
     <!-- Modal -->
@@ -181,13 +184,7 @@
     });
     {% endif %}
     $('#loader').hide();
-    const checkUsernameUrl = "{% url 'check_username' %}";
-    const csrfToken = "{{ csrf_token }}";
-    const updateProfileUrl = "{% url 'feed:update_profile' %}";
-    const uploadPostUrl = "{% url 'posts:upload_post' %}";
-    const followUrl = "{% url 'feed:follow' %}";
-    const unfollowUrl = "{% url 'feed:unfollow' %}";
-    const showFollow = "{% url 'feed:show_follow' %}";
+    console.log("Hello");
 </script>
 <script src="{% static 'js/showAlert.js' %}"></script>
 {% if request.path == '/profile/' %}

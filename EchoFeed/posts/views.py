@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
-from .models import UserPosts, Like
+from .models import UserPosts, Like, Comment
 from django.contrib.auth.models import User
 # Create your views here.
 
@@ -54,4 +54,24 @@ def unlike(request):
             else:
                 return JsonResponse({'success': False})
     except:
+        return HttpResponse('Invalid request')
+    
+def submit_comment(request):
+    if request.method == 'POST':
+        post_id = request.POST.get('id')
+        comment = request.POST.get('comment', '').strip()
+        if comment != '':
+            post = UserPosts.objects.get(id=post_id)
+            user = User.objects.get(username=request.user.username)
+            Comment.objects.create(user=user, post=post, comment=comment)
+
+            data = {
+                'success': True,
+                'username': user.username,
+                'profile_image': user.userprofile.profile_image.url,
+            }
+            return JsonResponse(data)
+        else:
+            return JsonResponse({'success': False})
+    else:
         return HttpResponse('Invalid request')

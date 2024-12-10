@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.serializers import serialize
 
 from accounts.models import UserProfile, Follow
-from posts.models import UserPosts, Like
+from posts.models import UserPosts, Like, Comment
 # Create your views here.
 
 @login_required
@@ -160,8 +160,8 @@ def show_follow(request):
     
 
 def explore(request):
-    random_posts = UserPosts.objects.filter(user__usersettings__is_private_account=False).order_by('?')[:5]
-    # random_posts = UserPosts.objects.filter(id=20)
+    # random_posts = UserPosts.objects.filter(user__usersettings__is_private_account=False).order_by('?')[:5]
+    random_posts = UserPosts.objects.filter(id=1)
     context = {
         'random_posts': random_posts,
     }
@@ -169,15 +169,29 @@ def explore(request):
 
 def show_post(request):
     if request.GET.get('id'):
+
+        # Post id from front-end
         id = request.GET.get('id')
+
+        # Getting UserPosts object
         post = UserPosts.objects.get(id=id)
+
+        # Getting profile_image, username and number of likes
         profile_image = post.user.userprofile.profile_image.url
         likes = post.like_count
         username = post.user.username
+        caption = post.caption
+
+        # Getting user object for checking if post liked by logged_in user or not
         user = User.objects.get(username=request.user.username)
         is_liked = Like.objects.filter(user=user, post=post).exists()
 
+        # Checking for follow or unfollow
         is_follows = Follow.objects.filter(follower__user__username=request.user.username, following__user__username=username).exists()
+
+        # Getting comments for the post
+        comments = Comment.objects.filter(post=post).order_by('-created_at')
+        comments = [{'id': c.id, 'profile_image':c.user.userprofile.profile_image.url, 'username': c.user.username, 'comment': c.comment, 'created_at': c.created_at} for c in comments]
         res = {
             'success': True,
             'profile_image': profile_image,
@@ -185,6 +199,8 @@ def show_post(request):
             'follows': is_follows,
             'likes':likes,
             'is_liked':is_liked,
+            'comments':comments,
+            'caption':caption,
         }
 
         return JsonResponse(res)

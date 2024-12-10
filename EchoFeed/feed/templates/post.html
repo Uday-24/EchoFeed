@@ -1,0 +1,59 @@
+<!-- Post Modal -->
+<div class="post-modal" id="postModal">
+    <button class="close-modal" id="close-modal">&times;</button>
+    <!-- image -->
+    <div class="post-image">
+        <img src="" alt="Loading">
+    </div>
+
+    <!-- Comment -->
+    <div class="post-comment">
+        <!-- User Detail -->
+        <div class="user-detail">
+            <div class="details">
+                <div class="user-image">
+                    <img src="" alt="">
+                </div>
+                <div class="other-detail">
+                    <p id="profileUsername" style="display:none;">Username</p>
+                    <strong><a href="">Username</a></strong>
+                    <button class="follow">Follow</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Comments -->
+        <div class="comments">
+            {% comment %} Comments will appear here {% endcomment %}
+        </div>
+        <hr>
+        <!-- Like Comment -->
+        <div class="like-comment">
+            <div class="buttons">
+                <button class="like-button">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="unlike-button">
+                    <i class="fa-solid fa-heart liked"></i>
+                </button>
+                <button class="comment-button">
+                    <i class="fa-regular fa-comment"></i>
+                </button>
+                <button class="share-button">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </button>
+                <button class="save-post-button">
+                    <i class="fa-regular fa-bookmark"></i>
+                </button>
+            </div>
+            <div class="like-count">
+                <strong></strong><span> Likes</span><br>
+                <small>25 November 2025</small>
+            </div>
+            <div class="make-comment">
+                <textarea name="comment-textarea" id="commentTextarea"></textarea>
+                <button class="comment-submit-button">Comment</button>
+            </div>
+        </div>
+    </div>
+</div>

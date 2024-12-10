@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
     <link rel="stylesheet" href="{% static "css/profile.css" %}">
     <link rel="stylesheet" href="{% static "css/searchModal.css" %}">
+    <link rel="stylesheet" href="{% static "css/postModal.css" %}">
     {% block css %}{% endblock %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -27,7 +28,7 @@
                         <input type="text" id="searchInput" placeholder="Type to search..." />
                         <div id="searchResults">Search results will appear here.</div>
                         <div class="search-all-results">
-                           
+                           <!-- Search results -->
                         </div>  
                     </div>
                 </div>
@@ -94,9 +95,27 @@
         </div>
     </div>
     <script>
+        const csrfToken = "{{ csrf_token }}";
+        const showPost = "{% url 'feed:show_post' %}"
+        const followUrl = "{% url 'feed:follow' %}";
+        const unfollowUrl = "{% url 'feed:unfollow' %}";
+        const likeUrl = "{% url 'posts:like' %}";
+        const unlikeUrl = "{% url 'posts:unlike' %}";
+        const submitCommentUrl = "{% url 'posts:submit_comment' %}"
+        const currentUsername = '{{user.username}}'
         const searchUrl = "{% url 'feed:profile_search' %}"
+        const checkUsernameUrl = "{% url 'check_username' %}";
+        const updateProfileUrl = "{% url 'feed:update_profile' %}";
+        const uploadPostUrl = "{% url 'posts:upload_post' %}";
+        const showFollow = "{% url 'feed:show_follow' %}";
+        $.ajaxSetup({
+            headers: { "X-CSRFToken": csrfToken }
+        });
     </script>
     <script src="{% static "js/searchModal.js" %}"></script>
+    <script src="{% static 'js/handleFollowUnfollow.js' %}"></script>
+    <script src="{% static 'js/handleLikeUnlike.js' %}"></script>
+    <script src="{% static 'js/postClick.js' %}"></script>
     {% block js %}
     {% endblock %}
 </body>

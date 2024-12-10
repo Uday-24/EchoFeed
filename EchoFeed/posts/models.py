@@ -40,3 +40,12 @@ class Like(models.Model):
 
     def __str__(self):
         return f"{self.user.username} Liked 'id={self.post.id}' post"
+    
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(UserPosts, on_delete=models.CASCADE)
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} commented on post (id={self.post.id})"

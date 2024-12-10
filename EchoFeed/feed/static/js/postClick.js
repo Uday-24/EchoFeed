@@ -1,3 +1,25 @@
+function showComments(comments, caption){
+    if(caption){
+        console.log(caption);
+    }
+
+    let html = '';
+    comments.forEach(comment => {
+        html += `<div class="user-detail">
+                <div class="user-image">
+                    <img src="${comment.profile_image}" alt="">
+                </div>
+                <div class="other-detail">
+                    <strong><a href="/user_profile/${comment.username}">${comment.username}</a></strong>
+                    <div class="comment">
+                    ${comment.comment}
+                    </div>
+                </div>
+            </div>`;
+    }); 
+    return html;
+}
+
 
 $(document).ready(function () {
     $('.unlike-button').hide();
@@ -5,6 +27,7 @@ $(document).ready(function () {
     var uname = ''
     var postId = 0
     $('.post-img').on('click', function(){
+        $('#loader').show();
         postId = $(this).attr('id');
         var postImgSrc = $(this).attr('src');
         $('#postModal').css('visibility', 'visible');
@@ -41,6 +64,10 @@ $(document).ready(function () {
                     $('.unlike-button').hide();
                     $('.like-button').fadeIn();
                 }
+
+                commentHtml = showComments(res.comments, res.caption);
+                $('.comments').html(commentHtml);
+                $('#loader').hide();
             }
         });
     });
@@ -114,5 +141,40 @@ $(document).ready(function () {
         handleLikeUnlike(unlikeUrl, postId, function(res){
             console.log(res);
         });
+    });
+
+    $('.comment-button').click(function(){
+        $('#commentTextarea').focus();
+    });
+
+    $('.comment-submit-button').click(function(){
+        let comment = $('#commentTextarea').val().trim();
+        $('#commentTextarea').val('');
+        if (comment != ''){
+            $.ajax({
+                url: submitCommentUrl,
+                type: 'POST',
+            data:{
+                'id': postId,
+                'comment': comment,
+            },
+            success: function(res){
+                if(res.success == true){
+                    let newComment = `<div class="user-detail">
+                        <div class="user-image">
+                            <img src="${res.profile_image}" alt="">
+                            </div>
+                            <div class="other-detail">
+                            <strong><a href="/user_profile/${res.username}">${res.username}</a></strong>
+                            <div class="comment">
+                            ${comment}
+                            </div>
+                        </div>
+                        </div>`;
+                        $('.comments').prepend(newComment);
+                    }   
+                }
+            });
+        }
     });
 });
