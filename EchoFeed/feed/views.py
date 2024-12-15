@@ -10,7 +10,17 @@ from posts.models import UserPosts, Like, Comment
 
 @login_required
 def index(request):
-    return render(request, 'feed/index.html')
+    current_user = User.objects.get(username='uday')
+    user_profile = UserProfile.objects.get(user=current_user)
+    following = Follow.objects.filter(follower=user_profile).values_list('following__user',flat=True)
+    liked_post = Like.objects.filter(user=current_user).values_list('post', flat=True)
+    posts = UserPosts.objects.filter(user__in=following).order_by('-creation_time').exclude(id__in=liked_post)
+
+    context = {
+        'posts':posts,
+    }
+
+    return render(request, 'feed/index.html', context)
 
 @login_required
 def profile(request):

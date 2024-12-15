@@ -1,8 +1,11 @@
 from django.test import TestCase
 from posts.models import *
+from accounts.models import *
 # Create your tests here.
 
-post = UserPosts.objects.get(id=1)
-comments = Comment.objects.filter(post=post)
-comments = [{'id': c.id, 'profile_image':c.user.userprofile.profile_image.url, 'username': c.user.username, 'comment': c.comment, 'created_at': c.created_at} for c in comments]
-print(comments)
+current_user = User.objects.get(username='uday')
+user_profile = UserProfile.objects.get(user=current_user)
+following = Follow.objects.filter(follower=user_profile).values_list('following__user',flat=True)
+liked_post = Like.objects.filter(user=current_user).values_list('post', flat=True)
+posts = UserPosts.objects.filter(user__in=following).order_by('-creation_time').exclude(id__in=liked_post)
+print(posts)

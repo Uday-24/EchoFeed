@@ -85,7 +85,8 @@
     color: #e0e0e0;
 }
 
-.details .other-detail .follow {
+.details .other-detail .follow,
+.details .other-detail .unfollow {
     font-size: 1rem;
     color: #6a11cb;
     margin-left: 0.7em;
@@ -210,8 +211,9 @@
     font-size: 1rem;
     padding: 0.5em;
     flex-shrink: 0;
-    color: white;
+    color: #6a11cb;
     cursor: pointer;
+    font-weight: bold;
 }
 
 /* Modal Close Button */

@@ -8,4 +8,5 @@ urlpatterns = [
     path('like/', views.like, name='like'),
     path('unlike/', views.unlike, name='unlike'),
     path('submit_comment/', views.submit_comment, name='submit_comment'),
+    path('fetch_comments/', views.fetch_comments, name='fetch_comments'),
 ]

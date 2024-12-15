@@ -1,5 +1,51 @@
 {% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/index.css" %}">
+{% endblock %}
 {% block title %}Index of EchoFeed{% endblock %}
 {% block main %}
-{{user}} Hello
+<div class="story-area">
+    <p>Story area</p>
+</div>
+<div class="post-area">
+    {% for post in posts %}
+    <div class="post" id='{{post.id}}'>
+        <div class="user-details">
+            <div class="image">
+                <img src="{{post.user.userprofile.profile_image.url}}" alt="">
+            </div>
+            <div class="username">
+                <span>{{post.user.username}}</span>
+                <button><i class="fa-solid fa-ellipsis"></i></button>
+            </div>
+        </div>
+        <div class="user-post">
+            <img src="{{post.post_img.url}}" alt="">
+        </div>
+        <div class="like-comment">
+            <div class="buttons">
+                <button class="like-button" id="like-btn-{{post.id}}"><i class="fa-regular fa-heart"></i></button>
+                <button class="unlike-button" id="unlike-btn-{{post.id}}" style="display:none"><i class="fa-solid fa-heart liked" style="color:red;"></i></button>
+                <button class="comment-button" id="comment-btn-{{post.id}}"><i class="fa-regular fa-comment"></i></button>
+                <button class="share-button"><i class="fa-solid fa-share-nodes"></i></button>
+                <button class="save-post-button"><i class="fa-regular fa-bookmark"></i></button>
+            </div>
+            <div class="like-count-{{post.id}}">
+                <strong>{{post.like_count}}</strong><span> Likes</span><br>
+            </div>
+            <div class="comment">
+                <caption>
+                    {{post.caption}}
+                </caption>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% include "post2.html" %}
+{% block js %}
+<script src="{% static 'js/postClick2.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}
 {% endblock %}

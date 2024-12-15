@@ -18,12 +18,14 @@ function handleLikeUnlike(URL, postID, callback) {
 
 function increse_like(selector){
     let likes = parseInt($(selector).text(), 10);
+    
     likes++;
     $(selector).text(likes);
 }
 
 function decrese_like(selector){
     let likes = parseInt($(selector).text(), 10);
+    
     likes--;
     if(likes >= 0){
         $(selector).text(likes);

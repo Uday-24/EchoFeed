@@ -75,3 +75,13 @@ def submit_comment(request):
             return JsonResponse({'success': False})
     else:
         return HttpResponse('Invalid request')
+    
+
+def fetch_comments(request):
+    if request.GET.get('post_id'):
+        id = request.GET.get('post_id')
+        comments = Comment.objects.filter(post__id=id).order_by('-created_at')
+        comments = [{'id': c.id, 'profile_image':c.user.userprofile.profile_image.url, 'username': c.user.username, 'comment': c.comment, 'created_at': c.created_at} for c in comments]
+        return JsonResponse({'comments': comments})
+    else:
+        return HttpResponse('Invalid Request')

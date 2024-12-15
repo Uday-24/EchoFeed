@@ -101,6 +101,7 @@
         const unfollowUrl = "{% url 'feed:unfollow' %}";
         const likeUrl = "{% url 'posts:like' %}";
         const unlikeUrl = "{% url 'posts:unlike' %}";
+        const fetchComments = "{% url 'posts:fetch_comments' %}";
         const submitCommentUrl = "{% url 'posts:submit_comment' %}";
         const currentUsername = '{{user.username}}';
         const searchUrl = "{% url 'feed:profile_search' %}";
@@ -115,7 +116,9 @@
     <script src="{% static "js/searchModal.js" %}"></script>
     <script src="{% static 'js/handleFollowUnfollow.js' %}"></script>
     <script src="{% static 'js/handleLikeUnlike.js' %}"></script>
+    {% if request.path != '/' %}
     <script src="{% static 'js/postClick.js' %}"></script>
+    {% endif %}
     {% block js %}
     {% endblock %}
 </body>
