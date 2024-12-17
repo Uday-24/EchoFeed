@@ -18,7 +18,8 @@
                     <p id="profileUsername" style="display:none;">Username</p>
                     <strong><a href="">Username</a></strong>
                     {% if request.path != '/profile/' %}
-                    <button class="follow">Follow</button>
+                    <button class="follow" id="followBtnPost">Follow</button>
+                    <button class="unfollow" id="unfollowBtnPost" style="display:none;">Unfollow</button>
                     {% endif %}
                 </div>
             </div>

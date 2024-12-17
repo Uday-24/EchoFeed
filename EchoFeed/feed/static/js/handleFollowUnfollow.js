@@ -6,9 +6,12 @@ function handleFollowUnfollow(URL, username, callback) {
             'following': username,
         },
         success: function (res) {
-            if (res.success) {
+            if (res && res.success === true) {
                 callback(1);
-            }
+            } 
+            else if (res && res.success === false) {
+                callback(0);
+            } 
             else {
                 callback(0);
             }

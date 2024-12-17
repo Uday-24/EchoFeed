@@ -1,5 +1,5 @@
-function showComments(comments, caption){
-    if(caption){
+function showComments(comments, caption) {
+    if (caption) {
         console.log(caption);
     }
 
@@ -16,7 +16,7 @@ function showComments(comments, caption){
                     </div>
                 </div>
             </div>`;
-    }); 
+    });
     return html;
 }
 
@@ -45,9 +45,11 @@ function fetchPostDetails(postId, postImgSrc) {
 
             // Update follow button
             if (res.follows) {
-                $('.other-detail button.follow').attr('id', 'unfollowBtn').text('Unfollow');
+                $('.other-detail button.follow').hide();
+                $('.other-detail button.unfollow').show();
             } else {
-                $('.other-detail button.follow').attr('id', 'followBtn').text('Follow');
+                $('.other-detail button.unfollow').hide();
+                $('.other-detail button.follow').show();
             }
 
             // Update like/unlike buttons
@@ -70,13 +72,13 @@ function fetchPostDetails(postId, postImgSrc) {
 }
 
 // Event listener for post image click
-$('.post-img').on('click', function () {
-    const postId = $(this).attr('id');
-    const postImgSrc = $(this).attr('src');
-    
-    // Call the function to fetch post details
-    fetchPostDetails(postId, postImgSrc);
-});
+// $('.post-img').on('click', function () {
+//     const postId = $(this).attr('id');
+//     const postImgSrc = $(this).attr('src');
+
+//     // Call the function to fetch post details
+//     fetchPostDetails(postId, postImgSrc);
+// });
 
 
 
@@ -86,36 +88,41 @@ $(document).ready(function () {
     var uname = ''
     var postId = 0
 
-    $('.post-img').on('click', function () {
-        const postId = $(this).attr('id');
-        const postImgSrc = $(this).attr('src');
-    
+    $('.post-img').off('click').on('click', function () {
+        postId = $(this).attr('id');
+        postImgSrc = $(this).attr('src');
+
         // Call the function to fetch post details
         fetchPostDetails(postId, postImgSrc);
     });
-    
-    
-    $('#close-modal').click(function(){
+
+
+    $('#close-modal').click(function () {
         $('#postModal').css('visibility', 'hidden');
     });
-    
+
     $(window).on('click', function (event) {
         if ($(event.target).is('#postModal')) {
             $('#postModal').css('visibility', 'hidden');
         }
     });
 
-    $(document).on('click', '#followBtn', function(e){
-        let username = uname;
-        handleFollowUnfollow(followUrl, username, function(res){
-            if(res==1){
-                $('.other-detail button.follow').attr('id', 'unfollowBtn');
-                $('.other-detail button.follow').text('Unfollow');
+
+    $('#followBtnPost').click(function(){
+        let username = $('#profileUsername').text().trim();
+
+        handleFollowUnfollow(followUrl, username, function (res) {
+            if (res == 1) {
+                $('.other-detail button.unfollow').show();
+                $('.other-detail button.follow').hide();
             }
-        });      
+            
+        });
     });
 
-    $(document).on('click', '#unfollowBtn', function(e){
+
+    $(document).on('click', '#unfollowBtnPost', function (e) {
+
         swal({
             title: "Unfollow",
             text: "Are you sure?",
@@ -126,64 +133,65 @@ $(document).ready(function () {
                 let username = $('#profileUsername').text().trim();
                 handleFollowUnfollow(unfollowUrl, username, function (res) {
                     if (res == 1) {
-                        $('.other-detail button.follow').attr('id', 'followBtn');
-                        $('.other-detail button.follow').text('Follow');
+                        $('.other-detail button.unfollow').hide();
+                        $('.other-detail button.follow').show();
                     }
                 });
             }
         });
     });
-    
+
 
     // Like on double click
-    $('.post-image').dblclick(function(e){
-        if($('.like-button').is(':visible')){
+    $('.post-image').dblclick(function (e) {
+        if ($('.like-button').is(':visible')) {
             increse_like('.like-count strong');
         }
         $('.like-button').hide();
         $('.unlike-button').fadeIn();
-        
-        handleLikeUnlike(likeUrl, postId, function(res){
+
+        handleLikeUnlike(likeUrl, postId, function (res) {
             console.log(res);
         });
     });
-    
-    $('.like-button').click(function(e){
+
+    $('.like-button').click(function (e) {
         $('.like-button').hide();
         $('.unlike-button').fadeIn();
         increse_like('.like-count strong');
-        handleLikeUnlike(likeUrl, postId, function(res){
+        handleLikeUnlike(likeUrl, postId, function (res) {
             console.log(res);
         });
     });
 
-    $('.unlike-button').click(function(e){
+    $('.unlike-button').click(function (e) {
         $('.unlike-button').hide();
         $('.like-button').fadeIn();
         decrese_like('.like-count strong');
-        handleLikeUnlike(unlikeUrl, postId, function(res){
+        handleLikeUnlike(unlikeUrl, postId, function (res) {
             console.log(res);
         });
     });
 
-    $('.comment-button').click(function(){
+    $('.comment-button').click(function () {
         $('#commentTextarea').focus();
     });
 
-    $('.comment-submit-button').click(function(){
+    $('.comment-submit-button').click(function () {
+
         let comment = $('#commentTextarea').val().trim();
         $('#commentTextarea').val('');
-        if (comment != ''){
+        if (comment != '') {
             $.ajax({
                 url: submitCommentUrl,
                 type: 'POST',
-            data:{
-                'id': postId,
-                'comment': comment,
-            },
-            success: function(res){
-                if(res.success == true){
-                    let newComment = `<div class="user-detail">
+                data: {
+                    'id': postId,
+                    'comment': comment,
+                },
+                success: function (res) {
+                    if (res.success == true) {
+                        let newComment = `<div class="user-detail">
                         <div class="user-image">
                             <img src="${res.profile_image}" alt="">
                             </div>
@@ -195,7 +203,7 @@ $(document).ready(function () {
                         </div>
                         </div>`;
                         $('.comments').prepend(newComment);
-                    }   
+                    }
                 }
             });
         }

@@ -10,7 +10,7 @@ from posts.models import UserPosts, Like, Comment
 
 @login_required
 def index(request):
-    current_user = User.objects.get(username='uday')
+    current_user = User.objects.get(username=request.user.username)
     user_profile = UserProfile.objects.get(user=current_user)
     following = Follow.objects.filter(follower=user_profile).values_list('following__user',flat=True)
     liked_post = Like.objects.filter(user=current_user).values_list('post', flat=True)
@@ -124,7 +124,7 @@ def follow(request):
             Follow.objects.create(follower=follower, following=following)
 
             return JsonResponse({'success': True})
-    except:
+    except Exception as e:
             return JsonResponse({'success': False})
 
     

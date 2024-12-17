@@ -67,7 +67,11 @@
                         <i class="fa-solid fa-user"></i> Profile
                     </a>
                 </li>
-                <li><a href="#"><i class="fa-solid fa-cog"></i> Settings</a></li>
+                <li>
+                    <a href="{% url "settings:edit_profile" %}" class="{% if request.path == '/settings/' %}active-link{% endif %}">
+                        <i class="fa-solid fa-cog"></i> Settings
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="bottom-bar">
