@@ -1,0 +1,55 @@
+.comments-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #111; /* Changed background color */
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .options p,
+  .gif-comments p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Increased spacing between options */
+    font-size: 14px;
+    cursor: pointer;
+  }
+  input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none; /* For Safari */
+    margin-right: 10px;
+    width: 20px; /* Size of the radio button */
+    height: 20px; /* Size of the radio button */
+    border: 1px solid white; /* Border color */
+    border-radius: 50%; /* Make it circular */
+    background-color: black; /* Default background */
+    cursor: pointer;
+    position: relative;
+    outline: none;
+  }
+
+  input[type="radio"]:checked {
+    background-color: black; /* Background when checked */
+  }
+
+  input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    width: 10px; /* Size of the white dot */
+    height: 10px; /* Size of the white dot */
+    background-color: white; /* Color of the dot */
+    border-radius: 50%; /* Make the dot circular */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

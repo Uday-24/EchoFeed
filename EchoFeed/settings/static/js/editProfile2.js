@@ -1,9 +1,31 @@
 $(document).ready(function(){
 
-    $('#edit-profile').click(function(e){
-    $('#loader').show();
-        e.preventDefault();
-        let formData = new FormData($('#edit-profile-form')[0]);
+    $('#bio-input').on('input', function() {
+        let charCount = $(this).val().length;
+        $('#char-count').text(charCount);
+    });
+
+    $('.save-profile-btn').click(function(){
+        let formData = new FormData();
+
+        // Get form data
+        let username = $('#username').val().trim();
+        let nickname = $('#nickname').val().trim();
+        let bio = $('#bio-input').val().trim();
+        let gender = $('#gender').val();
+        let profileImg = $('#file-input')[0].files[0]; // Get the selected file
+
+        // Append data to FormData
+        formData.append('username', username);
+        formData.append('nickname', nickname);
+        formData.append('bio', bio);
+        formData.append('gender', gender);
+        
+        if (profileImg) {
+            formData.append('profile_image', profileImg); // Append file
+        }
+
+
         $.ajax({
             url: updateProfileUrl,
             type: 'POST',

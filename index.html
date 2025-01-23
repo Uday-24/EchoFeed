@@ -1,76 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <title></title>
+    <title>Document</title>
 </head>
+
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <h1 class="sidebar-title">Settings</h1>
-            <ul class="menu">
-                <li>
-                    <a href="#" class="{% if request.path == '/settings/' %}active-link{% endif %}">
-                        Edit profile
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="">
-                        Password and security
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="">
-                        Personal details
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="">
-                        Account privacy 
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="">
-                        Blocked
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="">
-                        Comments
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="">
-                        Privacy center
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="">
-                        Contact us
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="">
-                        Delete account
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="">
-                        Logout
-                    </a>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="main">
-            <h2>Welcome to EchoFeed</h2>
-            <p>This is the main content area. Resize the screen to see the responsive sidebar in action.</p>
-        </div>
+    <div class="toggle-switch">
+        <input type="checkbox" id="toggle" />
+        <label for="toggle" class="slider"></label>
     </div>
+
 </body>
+
 </html>

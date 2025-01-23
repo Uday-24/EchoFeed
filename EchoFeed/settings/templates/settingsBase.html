@@ -17,32 +17,32 @@
             <h1 class="sidebar-title">Settings</h1>
             <ul class="menu">
                 <li>
-                    <a href="#" class="{% if request.path == '/settings/' %}active-link{% endif %}">
+                    <a href="{% url "settings:edit_profile" %}" class="{% if request.path == '/settings/' %}active-link{% endif %}">
                         Edit profile
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="">
+                    <a href="{% url "settings:password_and_security" %}" class="{% if request.path == '/settings/password_and_security/' %}active-link{% endif %}">
                         Password and security
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="">
+                    <a href="{% url "settings:personal_details" %}" class="{% if request.path == '/settings/personal_details/' %}active-link{% endif %}">
                         Personal details
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="">
+                    <a href="{% url "settings:account_privacy" %}" class="{% if request.path == '/settings/account_privacy/' %}active-link{% endif %}">
                         Account privacy 
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="">
+                    <a href="{% url "settings:blocked" %}" class="{% if request.path == '/settings/blocked/' %}active-link{% endif %}">
                         Blocked
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="">
+                    <a href="{% url "settings:comments" %}" class="{% if request.path == '/settings/comments/' %}active-link{% endif %}">
                         Comments
                     </a>
                 </li>
@@ -91,10 +91,14 @@
         const updateProfileUrl = "{% url 'feed:update_profile' %}";
         const uploadPostUrl = "{% url 'posts:upload_post' %}";
         const showFollow = "{% url 'feed:show_follow' %}";
+        const editProfile = "{% url 'settings:edit_profile' %}";
+        const url2faAndPrivate = "{% url 'settings:handle_2fa_private_account' %}";
+        const birthday = "{% url 'settings:birthday' %}";
         $.ajaxSetup({
             headers: { "X-CSRFToken": csrfToken }
         });
     </script>
+    <script src="{% static 'js/script.js' %}"></script>
     {% block js %}
     {% endblock %}
 </body>

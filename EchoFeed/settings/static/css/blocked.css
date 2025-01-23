@@ -1,0 +1,78 @@
+.blocked-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.back-arrow {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.info-text {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.blocked-list {
+    margin-top: 20px;
+}
+
+.blocked-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.profile-info {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.username {
+    font-weight: bold;
+    margin: 0;
+}
+
+.name {
+    margin: 0;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.unblock-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #000;
+    background: #1877f2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.unblock-btn:hover {
+    background: #579af2;
+}

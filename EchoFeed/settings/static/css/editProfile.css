@@ -1,0 +1,108 @@
+.main{
+    display: flex;
+    justify-content: center;
+}
+
+.edit-profile-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: 100%;
+    background-color: #111;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background: #262626;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover; /* Ensures the image fits properly */
+    background-color: #444;
+}
+
+input[type="file"] {
+   display: none;
+}
+
+
+.username {
+    font-weight: bold;
+}
+
+.full-name {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.change-photo-btn {
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, textarea, select {
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+.char-count {
+    font-size: 12px;
+    color: #aaa;
+    text-align: right;
+}
+
+.save-profile-btn{
+    background: #1877f2;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 16px;
+    cursor: pointer;
+}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block main %}
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="term">
+    <button type="submit">Submit</button>
+</form>
+
+<h1>Hello</h1>
+{% for record in data %}
+<h1>Name: {{record.name}} </h1>
+<h2>Mobile: {{record.mobile}} </h2>
+<h3>Email: {{record.email}} </h3>
+{% endfor %}
+{% endblock %}

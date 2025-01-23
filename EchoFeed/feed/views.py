@@ -6,6 +6,8 @@ from django.core.serializers import serialize
 
 from accounts.models import UserProfile, Follow
 from posts.models import UserPosts, Like, Comment
+from settings.models import UserSettings
+from .models import Test
 # Create your views here.
 
 @login_required
@@ -44,6 +46,17 @@ def update_profile(request):
             old_uname = request.user.username
             bio = request.POST.get('bio').strip()
             nickname = request.POST.get('nickname')
+            gender = request.POST.get('gender')
+            
+            if gender != None and gender != '':
+                if gender == 'no':
+                    update_row = UserSettings.objects.filter(user__username=request.user.username).update(gender=None)
+                else:
+                    update_row = UserSettings.objects.filter(user__username=request.user.username).update(gender=gender)
+                if not update_row:
+                    return JsonResponse({'gender_error':True})
+
+
             if new_uname != old_uname:
                 if User.objects.filter(username=new_uname).exists():
                     return JsonResponse({'username_taken':True})
@@ -216,3 +229,15 @@ def show_post(request):
         return JsonResponse(res)
     else:
         return HttpResponse('Invalid Request')
+    
+
+def new(request):
+
+    data = None
+
+    if request.method == "POST":
+        term = request.POST.get('term')
+        data = Test.objects.filter(name__icontains=term)
+        print(data)
+
+    return render(request, 'feed/new.html', context={'data':data})

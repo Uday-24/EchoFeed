@@ -63,6 +63,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{% url "feed:new" %}">
+                        <i class="fa-solid fa-bell"></i> Info
+                    </a>
+                </li>
+                <li>
                     <a href="{% url 'feed:profile' %}" class="{% if request.path == '/profile/' %}active-link{% endif %}">
                         <i class="fa-solid fa-user"></i> Profile
                     </a>

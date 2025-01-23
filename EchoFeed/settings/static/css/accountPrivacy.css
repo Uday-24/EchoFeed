@@ -1,0 +1,43 @@
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.account-privacy {
+    background-color: #111;
+    border-radius: 10px;
+    padding: 20px;
+    width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.privacy-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-bottom: 10px; */
+}
+
+.private-title {
+    font-size: 18px;
+    margin: 0;
+}
+
+.privacy-description {
+    font-size: 14px;
+    color: #ccc;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.learn-more:hover {
+    text-decoration: underline;
+}
+
+/* Toggle Switch Styling */

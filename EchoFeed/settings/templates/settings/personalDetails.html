@@ -1,0 +1,134 @@
+{% extends 'settingsBase.html' %}
+{% load static %}
+{% block css %}
+
+  <link rel="stylesheet" href="{% static 'css/passAndSec.css' %}" />
+  <style>
+    .option:hover {
+      background-color: #1e1e1e;
+      cursor: auto;
+    }
+  </style>
+{% endblock %}
+{% block title %}
+  Edit Profile
+{% endblock %}
+{% block main %}
+  <div class="pass-and-sec-container">
+    <h1>Personal details</h1>
+    <section class="section">
+      <p class="section-description">EchoFeed uses this information to verify your identity and to keep our community safe. You decide what personal details you make visible to others.</p>
+      <div class="option">
+        <div class="details">
+          <span>Contact info</span>
+          <br />
+          <small>timepass07008@gmail.com</small>
+        </div>
+        <div class="btn">
+          <button>Change</button>
+        </div>
+      </div>
+      <div class="option">
+        <div class="details">
+          <span>Birthday</span>
+          <br />
+          <small class="birthdate">{{ birthdate|date:"d-m-Y" }}</small>
+        </div>
+        <div class="btn">
+          <button>Edit</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Birthday</h2>
+        <button class="close-btn">&times;</button>
+      </div>
+      <p>Providing your birthday helps make sure you get the right experience for your age.</p>
+      <div class="birthday-info">
+        <div class="birthday-date">
+          <span class="birthdate">{{ birthdate|date:"d-m-Y" }}</span>
+          <button class="edit-btn">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calendar-modal hidden">
+    <div class="cal-modal-content">
+      <div class="cal-modal-header">
+        <h2>Select Your Birthday</h2>
+        <button class="close-calendar-btn">&times;</button>
+      </div>
+      <div class="calendar-container">
+        <input type="date" id="date-picker" placeholder="Select your birthday" />
+      </div>
+      <div class="modal-footer">
+        <button class="save-date-btn">Save</button>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}
+
+{% block js %}
+  <script>
+    $(document).ready(function () {
+      // Open Birthday Modal
+      $(".btn button:contains('Edit')").on("click", function () {
+        $(".modal-overlay").removeClass("hidden");
+      });
+    
+      // Close Birthday Modal
+      $(".close-btn").on("click", function () {
+        $(".modal-overlay").addClass("hidden");
+      });
+    
+      // Open Calendar Modal
+      $(".edit-btn").on("click", function () {
+        $(".modal-overlay").addClass("hidden"); // Close the Birthday Modal
+        $(".calendar-modal").removeClass("hidden");
+      });
+    
+      // Close Calendar Modal
+      $(".close-calendar-btn").on("click", function () {
+        $(".calendar-modal").addClass("hidden");
+      });
+      
+      $(window).on('click', function (e) {
+        if ($(e.target).is('.modal-overlay') || $(e.target).is('.calendar-modal')) {
+          $('.modal-overlay').addClass("hidden");
+          $('.calendar-modal').addClass("hidden");
+        }
+    });
+    
+      // Save date and close Calendar Modal
+      $(".save-date-btn").on("click", function () {
+        let selectedDate = $("#date-picker").val();
+        let dateObj = new Date(selectedDate);
+        let formattedDate = dateObj.toLocaleDateString("en-GB").replace(/\//g, "-");        $('.modal-overlay').addClass("hidden");
+        $('.calendar-modal').addClass("hidden");
+
+        $('.birthdate').text(formattedDate);
+
+        if (selectedDate) {
+          $.ajax({
+            type:'POST',
+            url: birthday,
+            data: {
+              'birthdate': selectedDate,
+            },
+            success: function(res){
+              console.log(res);
+            }
+          });
+        } else {
+          alert("Please select a valid date.");
+        }
+      });
+    });    
+  </script>
+{% endblock %}

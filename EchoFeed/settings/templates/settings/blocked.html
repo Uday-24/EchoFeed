@@ -1,0 +1,32 @@
+{% extends "settingsBase.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/blocked.css" %}">
+{% endblock %}
+{% block title %}Edit Profile{% endblock %}
+{% block main %}
+<div class="blocked-container">
+    <div class="header">
+      <h1>Blocked accounts</h1>
+    </div>
+    <p class="info-text">You can block people anytime from their profiles.</p>
+    <div class="blocked-list">
+      <div class="blocked-item">
+        <img src="profile1.jpg" alt="Profile" class="profile-pic">
+        <div class="profile-info">
+          <p class="username">elvish_yadav</p>
+          <p class="name">Elvish Raosahab</p>
+        </div>
+        <button class="unblock-btn">Unblock</button>
+      </div>
+      <div class="blocked-item">
+        <img src="profile2.jpg" alt="Profile" class="profile-pic">
+        <div class="profile-info">
+          <p class="username">munawar.faruqui</p>
+          <p class="name">Munawar Faruqui</p>
+        </div>
+        <button class="unblock-btn">Unblock</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}

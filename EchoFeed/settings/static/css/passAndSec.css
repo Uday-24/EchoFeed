@@ -1,0 +1,299 @@
+.pass-and-sec-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.section-description {
+    font-size: 14px;
+    color: #b0b0b0;
+    margin-bottom: 15px;
+}
+
+.option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option:hover {
+    background-color: #2a2a2a;
+}
+
+.details span {
+    font-size: 18px;
+}
+
+.details small {
+    color: #888888;
+}
+
+.option .btn button {
+    background: #1877f2;
+    color: white;
+    border: none;
+    width: 100px;
+    padding: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.arrow {
+    font-size: 18px;
+    color: #b0b0b0;
+}
+
+.arrow:hover {
+    color: #ffffff;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    /* Darker overlay for night mode */
+    z-index: 1000;
+}
+
+/* Hide modal by default */
+.hidden {
+    display: none;
+}
+
+/* Modal content box */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    background: #2d3748;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    color: #e2e8f0;
+}
+
+/* Modal header */
+.modal-content h2 {
+    color: #90cdf4;
+    /* Light blue for the heading */
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Modal form input fields */
+
+/* Modal submit button */
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 18px;
+    color: #e2e8f0;
+    /* Light grey for the close button */
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #f56565;
+    /* Red hover effect */
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .modal {
+        display: block;
+        position: relative;
+        height: auto;
+        width: auto;
+        background-color: #2d3748;
+        color: #fff;
+        width: 400px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+
+            h2 {
+                margin: 0;
+                font-size: 1.5rem;
+                color: #90cdf4;
+            }
+
+            .close-btn {
+                background: none;
+                border: none;
+                color: #fff;
+                font-size: 20px;
+                cursor: pointer;
+            }
+        }
+
+        .birthday-info {
+            margin: 20px 0;
+            border: 1px solid white;
+            padding: 18px 10px;
+            border-radius: 8px;
+
+            .birthday-date {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .edit-btn {
+                    background: #3182ce;
+                    color: #fff;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-weight: bold;
+
+                    &:hover {
+                        background: #63b3ed;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.calendar-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+
+    .cal-modal-content {
+        background: #2d3748;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        width: 90%;
+        max-width: 400px;
+        color: #e2e8f0;
+
+        .cal-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+
+            h2 {
+                margin: 0;
+                font-size: 1.5rem;
+                color: #90cdf4;
+            }
+
+            .close-calendar-btn {
+                background: none;
+                border: none;
+                color: #e2e8f0;
+                font-size: 1.5rem;
+                cursor: pointer;
+
+                &:hover {
+                    color: #f56565;
+                }
+            }
+        }
+
+        .calendar-container {
+            margin: 20px 0;
+
+            #date-picker {
+                width: 100%;
+                padding: 10px;
+                font-size: 1rem;
+                border-radius: 5px;
+                border: 1px solid #90cdf4;
+                background: #1a202c;
+                color: #e2e8f0;
+
+                &:focus {
+                    outline: none;
+                    border-color: #63b3ed;
+                }
+            }
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+
+            .save-date-btn {
+                background: #3182ce;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+
+                &:hover {
+                    background: #63b3ed;
+                }
+            }
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}

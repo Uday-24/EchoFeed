@@ -1,0 +1,33 @@
+{% extends "settingsBase.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/comments.css" %}">
+{% endblock %}
+{% block title %}Edit Profile{% endblock %}
+{% block main %}
+<div class="comments-container">
+    <h1>Comments</h1>
+    <div class="options">
+      <p>Allow comments from</p>
+      <label>
+        <input type="radio" name="comments" checked>
+        Everyone
+      </label>
+      <br>
+      <label>
+        <input type="radio" name="comments">
+        People You Follow
+      </label>
+      <br>
+      <label>
+        <input type="radio" name="comments">
+        Your Followers
+      </label>
+      <br>
+      <label>
+        <input type="radio" name="comments">
+        People You Follow and Your Followers
+      </label>
+    </div>
+</div>
+{% endblock %}

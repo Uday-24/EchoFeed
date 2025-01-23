@@ -1,0 +1,49 @@
+{% extends 'settingsBase.html' %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/passAndSec.css' %}" />
+{% endblock %}
+{% block title %}
+  Edit Profile
+{% endblock %}
+{% block main %}
+  <div class="pass-and-sec-container">
+    <h1>Password and security</h1>
+    <section class="section">
+      <h2 class="section-title">Login & recovery</h2>
+      <p class="section-description">Manage your passwords, login preferences and recovery methods.</p>
+      <a href="{% url 'change_password' %}" target="_blank">
+        <div class="option">
+          <span>Change password</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+      <a href="{% url 'password_reset' %}" target="_blank">
+        <div class="option">
+          <span>Reset password</span>
+          <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+      <div class="option 2fa-option">
+        <span>Two-factor authentication</span>
+        <span class="arrow">&rarr;</span>
+      </div>
+    </section>
+  </div>
+
+  <div id="2fa-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>2 Factor Authentication</h2>
+      <p>Two-factor authentication protects your account by requiring an additional code when you log in on a device we don't recognize.</p>
+      <br />
+      <div class="toggle-switch">
+        <input type="checkbox" id="toggle" {% if is_2fa_on %}checked{% endif %} />
+        <label for="toggle" class="slider"></label>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block js %}
+<script src="{% static "js/passAndSec.js" %}"></script>
+{% endblock %}

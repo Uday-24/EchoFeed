@@ -20,7 +20,7 @@
                 </div>
                 <div class="buttons">
                     {% if request.path == '/profile/' %}
-                    <button>Edit profile</button>
+                    <button class="edit-modal-button">Edit profile</button>
                     <button><i class="fa-solid fa-cog"></i></button>
                     {% else %}
                     {% if follows %}
@@ -170,7 +170,7 @@
 
         editButton.addEventListener("click", () => {
             modal.classList.remove("hidden");
-        });
+       });
 
         closeButton.addEventListener("click", () => {
             modal.classList.add("hidden");
@@ -184,7 +184,6 @@
     });
     {% endif %}
     $('#loader').hide();
-    console.log("Hello");
 </script>
 <script src="{% static 'js/showAlert.js' %}"></script>
 {% if request.path == '/profile/' %}

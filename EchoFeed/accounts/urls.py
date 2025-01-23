@@ -11,8 +11,15 @@ urlpatterns = [
     path('check_email/', views.check_email, name='check_email'),
     path('verify_otp/', views.verify_otp, name='verify_otp'),
     path('login/', views.login_page, name='login'),
+
+    # Password reser
     path('reset_password/', auth.PasswordResetView.as_view(template_name="accounts/reset_password.html"), name='password_reset'),
     path('reset_password_sent/', auth.PasswordResetDoneView.as_view(template_name="accounts/reset_password_sent.html"), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth.PasswordResetConfirmView.as_view(template_name="accounts/reset_password_confirm.html"), name='password_reset_confirm'),
     path('reset_password_complete/', auth.PasswordResetCompleteView.as_view(template_name="accounts/reset_password_complete.html"), name='password_reset_complete'),
+
+    # Change password
+    path('change-password/', auth.PasswordChangeView.as_view(template_name="accounts/change_password.html"), name='change_password'),
+    path('password-change-done/', auth.PasswordChangeDoneView.as_view(template_name="accounts/change_password_done.html"), name='password_change_done'),
+
 ]

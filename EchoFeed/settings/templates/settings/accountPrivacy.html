@@ -1,0 +1,32 @@
+{% extends "settingsBase.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/accountPrivacy.css" %}">
+{% endblock %}
+{% block title %}Edit Profile{% endblock %}
+{% block main %}
+<div class="account-privacy">
+    <h2 class="title">Account <strong>privacy</strong></h2>
+    <div class="privacy-container">
+        <div class="privacy-content">
+            <h3 class="private-title">Private account</h3>
+            <p class="privacy-description">
+                When your account is public, your profile and posts can be seen by anyone, on or off Instagram,
+                even if they don't have an EchoFeed account. <br> <br>
+                When your account is private, only the followers you approve can see what you share, including
+                your photos or videos on hashtag and location pages, and your followers and following lists.
+                Certain info on your profile, like your profile picture and username, is visible to everyone on and
+                off EchoFeed.
+            </p>
+        </div>
+    </div>
+    <br>
+    <div class="toggle-switch">
+        <input type="checkbox" id="toggle" {% if is_private %}checked{% endif %} />
+        <label for="toggle" class="slider"></label>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/accountPrivacy.js' %}"></script>
+{% endblock %}
