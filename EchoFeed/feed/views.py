@@ -183,8 +183,7 @@ def show_follow(request):
     
 
 def explore(request):
-    # random_posts = UserPosts.objects.filter(user__usersettings__is_private_account=False).order_by('?')[:5]
-    random_posts = UserPosts.objects.filter(id=1)
+    random_posts = UserPosts.objects.filter(user__usersettings__is_private_account=False).order_by('?')[:15]
     context = {
         'random_posts': random_posts,
     }
