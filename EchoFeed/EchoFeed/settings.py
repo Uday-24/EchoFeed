@@ -135,7 +135,7 @@ EMAIL_HOST = 'smtp.gmail.com' # Example for Gmail
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'timepass07008@gmail.com' # Your email address
-EMAIL_HOST_PASSWORD = 'tjmsdcxpqribwdnb' # Your email password
+EMAIL_HOST_PASSWORD = '------' # Your email password
 
 # For saving hash password
 PASSWORD_HASHERS = [
